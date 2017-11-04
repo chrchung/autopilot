@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="semantic.min.css">
+<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/components/icon.min.css'>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/restangular/1.5.1/restangular.min.js"></script>
+<script type="text/javascript" src="lodash.js"></script>
+<script type="text/javascript" src="semantic.min.js"></script>
+<script type="text/javascript" src="angular-ui-router.min.js"></script>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=0.5, user-scalable=no" />
+
+    <base href="/">
+
+    <style>
+
+        @font-face {
+            font-family: lovelo;
+            src: url('Lovelo Black.otf');
+        }
+
+        #game-panel {
+            position:fixed;
+            bottom: 0;
+            width: auto;
+            right: 0;
+        }
+
+        #loading {
+            background-color: white;
+            position:absolute;
+            top:0;
+            right:0;
+            left:0;
+            bottom:0;
+            z-index: 10;
+        }
+
+        #power {
+            margin-top: 10px;
+            width: 30%;
+            background-color: #cee1ff;
+            border-radius: 5px;
+            margin-left: 35%;
+            margin-right: 35%;
+            display: none;
+            padding: 20px;
+            position: absolute;
+        }
+
+        .med-button {
+            margin-bottom:10px !important;
+        }
+
+        #loading2 {
+            width: 30%;
+            top: 30%;
+            left: 35%;
+            position: absolute;
+        }
+
+        #bad {
+            width: 30%;
+            background-color: #fff996;
+            border-radius: 5px;
+            margin-left: 35%;
+            margin-right: 35%;
+            display: none;
+            padding: 20px;
+            position: absolute;
+        }
+
+        .scroll-btn {
+            font-size: 17px !important;
+        }
+
+
+        .tut-text {
+            width: 70%;
+            margin-top: 5%;
+            margin-right: 15%;
+            margin-left: 15%;
+            min-height: 40vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .tut-text .button {
+            margin: 15%;
+
+        }
+
+        body {
+            font-size: 20px;
+        }
+
+        .selected {
+            border-color:black !important;
+        }
+
+        canvas {
+            -khtml-user-select: none;
+            -o-user-select: none;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            user-select: none;
+            /*padding:5px;*/
+            padding:2px;
+
+        }
+
+        .ele {
+            border-style: dotted;
+            margin-top: 1px;
+            margin-bottom: 1px;
+            border-width: 2px;
+            border-color: white;
+            max-height: 50px;
+            vertical-align:bottom;
+            cursor:pointer;
+        }
+
+        .scrolls {
+            table-layout:fixed;
+            min-width:40px;
+            overflow:hidden;
+            word-wrap:break-word;
+            display:inline-block;
+        }
+
+        table, th, td {
+            /*padding: 1px;*/
+        }
+
+        .models .set {
+            width: 70%
+        }
+
+        .models .arrow {
+            width: 30%
+        }
+
+        canvas {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .auth {
+            position:absolute;
+            top: 25%;
+            right: 25%;
+            width:50%;
+        }
+
+        .background {
+            background: url("bg.png");
+            background-size: cover;
+            width: 100%;
+            height: 100%;
+        }
+
+        .background2 {
+            background: url("bg2.png");
+            background-size: cover;
+            width: 100%;
+            height: 100%;
+        }
+
+        #main h1 {
+            padding-top: 20%;
+            font-size: 70px;
+            text-align: center;
+            color: black;
+        }
+
+        .big-button {
+            font-size: 25px !important;
+            margin: 10px;
+        }
+
+        .landing-item {
+            font-size: 40px;
+            margin: 20px;
+            font-family: lovelo;
+            cursor:pointer;
+            line-height: 40px;
+
+        }
+
+        .landing-container {
+            position: absolute;
+            top: 20%;
+            width: 100%;
+        }
+
+        #scoreboard-container {
+            position: absolute;
+            width: 70%;
+            right: 15%;
+            top: 5%;
+        }
+
+        #happiness {
+            font-size: 30px;
+            margin: 10px;
+            line-height: 30px;
+        }
+
+        #sugg {
+            margin: 10px;
+        }
+
+        .big-a {
+            font-size: 30px;
+            line-height: 30px;
+        }
+
+        .game-big-pop {
+            width:50%;
+            margin-left:25%;
+            margin-right:25%;
+            margin-top:20px;
+            background-color:white;
+            padding:20px;
+            border-radius:10px;
+        }
+
+        #tips-container {
+            position: absolute;
+            width: 70%;
+            right: 15%;
+            top: 15%;
+        }
+
+        .performance {
+            border-radius: 10px;
+            background-color: white;
+            padding: 20px;
+            width: 50%;
+            margin-left: 25%;
+        }
+
+        @media only screen and (max-width: 500px) {
+            #main h1 {
+                padding-top: 50%;
+                font-size: 50px;
+                line-height: 50px;
+
+            }
+
+            #scoreboard-container {
+                font-size: 15px;
+            }
+
+            .landing-item {
+                font-size: 40px;
+                line-height: 50px;
+                margin: 30px;
+                font-family: lovelo;
+                cursor:pointer;
+
+            }
+
+            .game-big-pop {
+                width:90%;
+                margin-left:5%;
+                margin-right:5%;
+                margin-top:20px;
+                background-color:white;
+                padding:20px;
+                border-radius:10px;
+            }
+
+            /*.eles td {*/
+                /*margin-bottom: 3px !important;*/
+                /*margin-top: 3px !important;*/
+            /*}*/
+
+        }
+
+        @media only screen and (max-device-width: 640px), only screen and (max-device-width: 667px), only screen and (max-device-width: 480px) and (orientation : portrait){
+            #main h1 {
+                padding-top: 50%;
+                font-size: 90px;
+                text-align: center;
+                color: black;
+            }
+
+            #happiness {
+                font-size: 40px !important;
+                line-height: 40px !important;
+            }
+
+            .landing-item {
+                font-size: 70px;
+                margin: 20px;
+                font-family: lovelo;
+                cursor:pointer;
+            }
+
+            .landing-container {
+                top: 20%;
+            }
+
+
+            .big-button {
+                font-size: 50px !important;
+                margin: 10px;
+            }
+
+            #loading2 {
+                width: 70%;
+                top: 30%;
+                left: 15%;
+                position: absolute;
+            }
+
+
+            .auth h1 {
+                font-size: 50px;
+                line-height: 50px;
+                margin-bottom: 20px;
+            }
+
+            .auth {
+                position:absolute;
+                top: 1%;
+                left: 5%;
+                width: 90%;
+            }
+
+            label {
+                font-size: 40px !important;
+            }
+
+            .field {
+                margin-bottom: 30px !important;
+            }
+
+            input {
+                margin-top: 15px !important;
+                font-size: 40px !important;
+            }
+
+            #scoreboard-container {
+                font-size: 40px;
+                line-height: 40px;
+            }
+
+            #scoreboard-container {
+                position: absolute;
+                width: 90%;
+                right: 5%;
+                top: 20%;
+            }
+
+
+            .ele {
+                border-style: dotted;
+                margin-top: 1px;
+                margin-bottom: 1px;
+                border-width: 2px;
+                border-color: white;
+                max-height: 90px;
+                vertical-align:bottom;
+                cursor:pointer;
+            }
+
+            .scrolls {
+                table-layout:fixed;
+                min-width:40px;
+                overflow:hidden;
+                word-wrap:break-word;
+                display:inline-block;
+            }
+
+            #happiness {
+                font-size: 30px;
+                line-height: 30px;
+            }
+
+            .scroll-btn {
+                font-size: 35px !important;
+                min-width: 95px;
+                margin: 5px;
+            }
+
+
+            .big-a {
+                font-size: 50px;
+                line-height: 50px;
+            }
+
+            .tut-text {
+                font-size: 40px;
+                line-height: 40px;
+            }
+
+            .game-big-pop {
+                width:90%;
+                margin-left:5%;
+                margin-right:5%;
+                margin-top:20px;
+                background-color:white;
+                padding:20px;
+                border-radius:10px;
+                font-size: 40px;
+                line-height: 40px;
+
+            }
+
+            .med-button {
+                font-size: 30px !important;
+                margin-bottom: 20px !important;
+            }
+
+            .med-button .button {
+                font-size: 40px !important;
+            }
+
+            #tips-container {
+                font-size: 40px;
+                line-height: 40px;
+            }
+
+
+            .landing-container {
+                font-size: 40px!important;
+                line-height: 40px!important;
+            }
+
+            /*.eles td  {*/
+                /*margin-bottom: 3px !important;*/
+                /*margin-top: 3px !important;*/
+            /*}*/
+
+            #ele-panel {
+                margin-bottom: 500px;
+            }
+        }
+
+
+    </style>
+</head>
+<body style="width:100%; height:100%">
+
+<div ng-app="myApp" style="width:100%; height:100%">
+    <div ui-view style="width:100%; height:100%"></div>
+</div>
+
+<script src="game.js"></script>
+<script src="game2.js"></script>
+<script src="main.js"></script>
+<script src="auth.js"></script>
+<script src="scoreboard.js"></script>
+<script src="tutorial.js"></script>
+<script src="states.js"></script>
+<script src="landing.js"></script>
+<script src="signup.js"></script>
+<script src="randomcolor/randomColor.js"></script>
+
+<script>
+    // disable mobile zoom
+    (function($) {
+        $.fn.nodoubletapzoom = function() {
+            $(this).bind('touchstart', function preventZoom(e){
+                var t2 = e.timeStamp;
+                var t1 = $(this).data('lastTouch') || t2;
+                var dt = t2 - t1;
+                var fingers = e.originalEvent.touches.length;
+                $(this).data('lastTouch', t2);
+                if (!dt || dt > 500 || fingers > 1){
+                    return; // not double-tap
+                }
+                e.preventDefault(); // double tap - prevent the zoom
+                // also synthesize click events we just swallowed up
+                $(e.target).trigger('click');
+            });
+        };
+    })(jQuery);
+
+    $("body").nodoubletapzoom();
+</script>
+
+</body>
+</html>

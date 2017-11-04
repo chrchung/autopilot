@@ -1,0 +1,31 @@
+{
+  "name": "matchmakers2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chrchung/matchmakers2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chrchung/matchmakers2/issues"
+  },
+  "homepage": "https://github.com/chrchung/matchmakers2#readme",
+  "dependencies": {
+    "async": "^2.1.4",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "express-session": "^1.14.2",
+    "lodash": "^4.17.2",
+    "parse": "^1.9.2"
+  },
+  "devDependencies": {
+    "randomcolor": "^0.4.4"
+  }
+}

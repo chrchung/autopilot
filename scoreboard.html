@@ -1,0 +1,26 @@
+<section class="background">
+    <div id="scoreboard-container" class="text-center">
+        <!--<div ng-show="overallScore">-->
+            <!--&lt;!&ndash;Your total score is  <span class="score">{{overallScore}}</span>. Your rank is&ndash;&gt;-->
+            <!--&lt;!&ndash;<span class="score">{{overallScoreRank || 'unranked'}}</span>.&ndash;&gt;-->
+            <!--&lt;!&ndash;<br>&ndash;&gt;-->
+            <!--&lt;!&ndash;Check whether you appear in the scoreboard below!&ndash;&gt;-->
+        <!--</div>-->
+
+        <table class="table nostyle">
+            <thead>
+            <tr>
+                <th class="text-center">Player</th>
+                <th class="text-center">Score</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-show="score.overallScore > 0" ng-repeat="score in scores">
+                <td>{{ score.user }}</td>
+                <td>{{ score.overallScore }}</td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+    </div>
+</section>

@@ -1,0 +1,237 @@
+<div id="loading">
+    <img id="loading2" src="loading.gif"/>
+</div>
+
+<div id="power" class="text-center">
+    Power round!
+    If you can beat this round, your cumulative score over
+    all games will be multiplied by 10!
+</div>
+
+<div id="ele-panel" style="margin-left:7px;margin-right:7px;margin-top:7px">
+    <table class="eles" style="" class="nostyle">
+        <tr style="" ng-repeat="model in modelNames">
+            <td style="margin-right: 5px;margin-top:5px;" class="scrolls ui buttons">
+                <!--&lt;!&ndash;<button id="neg" class="scroll-btn ui left attached black basic icon button scroll_{{model}}" ng-click="getNext(model, '-')">{{models[model].length - positions[model].pos}}</button>&ndash;&gt;-->
+                <!--&lt;!&ndash;<button id="for" class="scroll-btn right attached ui black basic icon button scroll_{{model}}" ng-click="getNext(model, '+')">{{positions[model].pos}}</button>&ndash;&gt;-->
+                <!--<button ng-click="getNext(model, '-')" class="scroll_{{model}} scroll-btn ui black icon button" style=""><i class="pointing left icon"></i></button>-->
+                <!--<button style="font-size:10px;min-width:70px;border-width:1px;border-style:solid;background-color:white;cursor:default;color:black;" class="scroll_{{model}} ui button">{{positions[model].pos + 1}} / {{ models[model].length }}</button>-->
+                <!--<button ng-click="getNext(model, '+')" class="scroll_{{model}} scroll-btn ui black icon button" style=""><i class="pointing right icon"></i></button>-->
+
+                <button ng-click="toggleModelReorder(model)" id="reorder_{{model}}" class="scroll-btn ui black icon button" style="visibility:hidden"><i class="checkmark icon"></i></button>
+
+            </td>
+
+            <td style="margin-top:5px;">
+                <!--only cont bar gets shown-->
+                <canvas class="ele" style="border-radius:5px"  ng-right-click="toggleModelReorder(model)" ng-click="select(model)" id="suggest_bar_{{model}}"></canvas>
+                <canvas class="ele" style="border-radius:5px;display:none" ng-click="select(model)" id="friend_bar_{{model}}"></canvas>
+                <canvas class="ele" style="border-radius:5px;display:none" ng-click="select(model)" id="cont_bar_{{model}}"></canvas>
+                <canvas class="ele" style="border-radius:5px;display:none" ng-click="select(model)" id="model_{{model}}"></canvas>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+
+<div ng-show="end == 4" style="top:0;bottom:0;left:0;right:0;position:absolute;background-color:rgba(255,255,255,0.5)">
+
+</div>
+
+
+<!--end == 1-->
+<div ng-show="" style="top:0;bottom:0;left:0;right:0;position:absolute;background-color:rgba(255,255,255,0.5)">
+    <div class="game-big-pop">
+        Congrats! You've reached the target score.<br>
+        Please enter a username and password to save your progress
+        and advance to the next round.<br>
+
+        <form class="ui form">
+            <div class="field">
+                <label>Username</label>
+                <input type="text" ng-model="user.username" placeholder="Username" required>
+            </div>
+            <div class="field">
+                <label>Password</label>
+                <input type="password" ng-model="user.password" placeholder="Password" required>
+            </div>
+
+            <div class="field">
+                <label>Mechanical Turk ID *Optional.</label>
+                <input type="email" ng-model="user.turk" placeholder="Mechanical Turk ID">
+            </div>
+
+            <div class="text-center">
+                <button class="big-button ui black button" ng-click="signup()" type="submit">Sign up</button>
+            </div>
+        </form>
+
+        <div ng-show="taken" class="ui error message">
+            <div class="header">Sorry, this username is taken.</div>
+            <p>Please choose another one.</p>
+        </div>
+    </div>
+
+</div>
+
+<!--end == 2 || end == 3-->
+<div ng-show="end == 2 || end == 3" style="top:0;bottom:0;left:0;right:0;position:absolute;background-color:rgba(255,255,255,0.5)">
+    <div class="game-big-pop" class="text-center" style="">
+        <!--end == 2-->
+        <div class="text-center">Congrats! You've reached the target score.<br></div>
+
+        <div ng-show="cond == 'k'">
+            Thanks for helping software designers solve an important problem!
+        </div>
+
+        <div ng-show="cond == 'ds'">
+            <div class="text-center">Your total score:  <span class="score">{{overallScore}}</span>.<br>
+                Your rank amongst other players:
+                <span class="score">{{overallScoreRank || 'unranked'}}</span>.<br>
+                Check whether you appear in the scoreboard below!
+            </div>
+            <br>
+                <table class="table text-center nostyle">
+                    <thead>
+                    <tr>
+                        <th class="text-center">Player</th>
+                        <th class="text-center">Earnings</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-show="score.overallScore > 0" ng-repeat="score in scores">
+                        <td>{{ score.user }}</td>
+                        <td>{{ score.overallScore }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+        </div>
+
+        <div class="text-center" ng-show="cond == 'ko'">
+            Thanks helping software designers
+            solve an important problem!<br>
+
+            Players collective score: {{performance.allP}}.<br>
+
+            To be the computer, players must score another {{performance.hsim - performance.allP}} points.
+        </div>
+
+        <div ng-show="cond == 'so'">
+            <div class="text-center">
+                Players collective score: {{performance.allP}} (Your contribution: {{performance.player}}).<br>
+                Your rank amongst other players: <span class="score">{{overallScoreRank || 'unranked'}}</span>.<br>
+                To beat the computer, players must score another {{performance.hsim - performance.allP}} points.<br>
+                Check whether you appear in the scoreboard below!
+            </div>
+            <br>
+
+            <table class="table text-center nostyle">
+                <thead>
+                <tr>
+                    <th class="text-center">Player</th>
+                    <th class="text-center">Earnings</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-show="score.overallScore > 0" ng-repeat="score in scores">
+                    <td>{{ score.user }}</td>
+                    <td>{{ score.overallScore }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div ng-show="cond == 'kso'">
+            <div class="text-center">
+                Thanks for helping software designers solve a difficult problem! <br>
+
+                Players collective score: {{performance.allP}} (Your contribution: {{performance.player}}).<br>
+                Your rank amongst other players: <span class="score">{{overallScoreRank || 'unranked'}}</span>.<br>
+                To beat the computer, players must score another {{performance.hsim - performance.allP}} points.<br>
+                Check whether you appear in the scoreboard below!
+            </div>
+            <br>
+
+            <table class="table text-center nostyle">
+                <thead>
+                <tr>
+                    <th class="text-center">Player</th>
+                    <th class="text-center">Earnings</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-show="score.overallScore > 0" ng-repeat="score in scores">
+                    <td>{{ score.user }}</td>
+                    <td>{{ score.overallScore }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <div ng-show="cond == 'dso'">
+            <div class="text-center">
+                Players collective score: {{performance.allP}} (Your contribution: {{performance.player}}).<br>
+                Your rank amongst other players: <span class="score">{{overallScoreRank || 'unranked'}}</span>.<br>
+                To beat the computer, players must score another {{performance.hsim - performance.allP}} points.<br>
+                Check whether you appear in the scoreboard below!
+            </div>
+            <br>
+
+            <table class="table text-center nostyle">
+                <thead>
+                <tr>
+                    <th class="text-center">Player</th>
+                    <th class="text-center">Earnings</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-show="score.overallScore > 0" ng-repeat="score in scores">
+                    <td>{{ score.user }}</td>
+                    <td>{{ score.overallScore }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div ng-show="cond == 'do'">
+            <div class="text-center">
+                Players collective score: {{performance.allP}} (Your contribution: {{performance.player}}).<br>
+                To beat the computer, players must score another {{performance.hsim - performance.allP}} points.<br>
+            </div>
+        </div>
+
+        <br>
+        <div class="text-center">
+            <button class="big-button ui black button" ng-click="reload()">Continue playing</button>
+        </div>
+    </div>
+</div>
+
+
+<div id="game-panel" style="" class="">
+    <div style="float:right;">
+        <div id="happiness" style="">
+            <div>Happiness:</div>
+            <div>{{ score }}/{{ target * leeway }}</div>
+        </div>
+    </div>
+    <div style="" class="">
+        <div id="sugg">
+            <div style="" class="med-button ui buttons">
+                <button ng-click="getSuggestion('-')" class="ui black icon button" style=""><i class="pointing left icon"></i></button>
+                <button style="min-width:95px;border-width:1px;border-style:solid;background-color:white;cursor:default;color:black;" class="ui button"><span ng-show="suggestions.suggestionList.length == 0">None</span><span ng-show=suggestions.suggestionList.length != 0">{{(suggestions.counter + 1|| 0)}} / {{suggestions.suggestionList.length}}</span></button>
+                <button ng-click="getSuggestion('+')" class=" ui black icon button" style=""><i class="pointing right icon"></i></button>
+            </div>
+            <br>
+            <div style="" class="med-button ui buttons">
+                <button ng-click="getNextAll('-')" class="ui black icon button" style=""><i class="pointing left icon"></i></button>
+                <button style="min-width:95px;border-width:1px;border-style:solid;background-color:white;cursor:default;color:black;" class="ui button"><span ng-show="scroll.max == -1">0/0</span><span ng-show="scroll.max != -1">{{scroll.counter + 1}} / {{models[scroll.max].length}}</span></button>
+                <button ng-click="getNextAll('+')" class="ui black icon button" style=""><i class="pointing right icon"></i></button>
+            </div>
+
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,32 @@
+<div class="background">>
+    <div class="auth">
+        <form class="ui form">
+            <div class="field">
+                <label>Username</label>
+                <input type="text" ng-model="user.username" placeholder="Username" required>
+            </div>
+            <div class="field">
+                <label>Password</label>
+                <input type="password" ng-model="user.password" placeholder="Password" required>
+            </div>
+
+            <div class="field">
+                <label>Mechanical Turk ID *Optional.</label>
+                <input type="text" ng-model="user.turk" placeholder="Mechanical Turk ID">
+            </div>
+
+            <div class="field">
+                <input type="checkbox" ng-model="user.know"> <b> I've heard about this game before.</b>
+            </div>
+
+            <div class="text-center">
+                <button class="big-button ui black button" ng-click="signup()" type="submit">Sign up</button>
+            </div>
+        </form>
+
+        <div ng-show="taken" class="ui error message">
+            <div class="header">Sorry, this username is taken.</div>
+            <p>Please choose another one.</p>
+        </div>
+    </div>
+</div>
