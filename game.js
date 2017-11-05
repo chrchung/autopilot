@@ -1633,7 +1633,7 @@ app.controller('gameCtrl', function($scope, Restangular, $state) {
                     start(); //start game when all images have loaded
                 }
             };
-            img.src = 'https://chrchung.github.io/Creatures/' + i + '.png';
+            img.src = 'https://anonymoususer12.github.io/alien/' + i + '.png';
             img.width = dim;
             img.height = dim;
             images.push(img);

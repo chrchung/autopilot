@@ -1,3 +1,5 @@
+
+
 <div id="loading">
     <img id="loading2" src="loading.gif"/>
 </div>
@@ -82,49 +84,13 @@
         <div class="text-center">Congrats! You've reached the target score.<br></div>
 
         <div ng-show="cond == 'k'">
-            Thanks for helping software designers solve an important problem!
+            <!--Thanks for playing! Your efforts will help improve software engineering practices.<br><br>-->
         </div>
 
-        <div ng-show="cond == 'ds'">
-            <div class="text-center">Your total score:  <span class="score">{{overallScore}}</span>.<br>
-                Your rank amongst other players:
-                <span class="score">{{overallScoreRank || 'unranked'}}</span>.<br>
-                Check whether you appear in the scoreboard below!
-            </div>
-            <br>
-                <table class="table text-center nostyle">
-                    <thead>
-                    <tr>
-                        <th class="text-center">Player</th>
-                        <th class="text-center">Earnings</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr ng-show="score.overallScore > 0" ng-repeat="score in scores">
-                        <td>{{ score.user }}</td>
-                        <td>{{ score.overallScore }}</td>
-                    </tr>
-                    </tbody>
-                </table>
-        </div>
+        <div ng-show="cond == 'ks'">
+            <!--Thanks for playing! Your efforts will help improve software engineering practices.<br><br>-->
 
-        <div class="text-center" ng-show="cond == 'ko'">
-            Thanks helping software designers
-            solve an important problem!<br>
-
-            Players collective score: {{performance.allP}}.<br>
-
-            To be the computer, players must score another {{performance.hsim - performance.allP}} points.
-        </div>
-
-        <div ng-show="cond == 'so'">
-            <div class="text-center">
-                Players collective score: {{performance.allP}} (Your contribution: {{performance.player}}).<br>
-                Your rank amongst other players: <span class="score">{{overallScoreRank || 'unranked'}}</span>.<br>
-                To beat the computer, players must score another {{performance.hsim - performance.allP}} points.<br>
-                Check whether you appear in the scoreboard below!
-            </div>
-            <br>
+            Your score is <span class="score">{{performance.player}} (Rank: {{overallScoreRank || 'unranked'}})</span>. Can you improve your score?
 
             <table class="table text-center nostyle">
                 <thead>
@@ -141,15 +107,22 @@
                 </tbody>
             </table>
         </div>
+
+
+        <div class="text-center" ng-show="cond == 'ko'">
+            <!--Thanks for playing! Your efforts will help improve software engineering practices.<br><br>-->
+
+            Players collectively scored {{performance.allP}}. Can you help improve this score?
+        </div>
+
 
         <div ng-show="cond == 'kso'">
             <div class="text-center">
-                Thanks for helping software designers solve a difficult problem! <br>
+                <!--Thanks for playing! Your efforts will help improve software engineering practices.<br><br>-->
 
-                Players collective score: {{performance.allP}} (Your contribution: {{performance.player}}).<br>
-                Your rank amongst other players: <span class="score">{{overallScoreRank || 'unranked'}}</span>.<br>
-                To beat the computer, players must score another {{performance.hsim - performance.allP}} points.<br>
-                Check whether you appear in the scoreboard below!
+                Your score is <span class="score">{{performance.player}} (Rank: {{overallScoreRank || 'unranked'}})</span>. Can you improve your score? <br><br>
+
+                Players collectively scored {{performance.allP}}. Can you help improve this score?
             </div>
             <br>
 
@@ -169,13 +142,13 @@
             </table>
         </div>
 
-
-        <div ng-show="cond == 'dso'">
+        <div ng-show="cond == 'kos'">
             <div class="text-center">
-                Players collective score: {{performance.allP}} (Your contribution: {{performance.player}}).<br>
-                Your rank amongst other players: <span class="score">{{overallScoreRank || 'unranked'}}</span>.<br>
-                To beat the computer, players must score another {{performance.hsim - performance.allP}} points.<br>
-                Check whether you appear in the scoreboard below!
+                <!--Thanks for playing! Your efforts will help improve software engineering practices.<br><br>-->
+
+                Players collectively scored {{performance.allP}}. Can you help improve this score?<br><br>
+
+                Your score is <span class="score">{{performance.player}} (Rank: {{overallScoreRank || 'unranked'}})</span>. Can you improve your score?
             </div>
             <br>
 
@@ -193,13 +166,6 @@
                 </tr>
                 </tbody>
             </table>
-        </div>
-
-        <div ng-show="cond == 'do'">
-            <div class="text-center">
-                Players collective score: {{performance.allP}} (Your contribution: {{performance.player}}).<br>
-                To beat the computer, players must score another {{performance.hsim - performance.allP}} points.<br>
-            </div>
         </div>
 
         <br>

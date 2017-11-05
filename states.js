@@ -73,4 +73,11 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
             controller: 'signupCtrl'
         });
 
+
+    $stateProvider
+        .state('quit', {
+            url: '/quit',
+            templateUrl: 'quit.html'
+        });
+
 });

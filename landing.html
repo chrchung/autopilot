@@ -1,59 +1,66 @@
+<!--<div style="float:right;margin:1%">-->
+    <!--<button ui-sref="quit" class="ui massive black basic icon button">-->
+        <!--Quit-->
+        <!--<i class="remove icon"></i>-->
+    <!--</button>-->
+<!--</div>-->
+
+
 <section class="landing background">
     <div class="landing-container text-center">
+
         <div ng-show="cond == 'k'">
-            Thanks for helping software designers solve an important problem!
+            <!--Thanks for playing! Your efforts will help improve software engineering practices.<br><br>-->
         </div>
 
-        <div ng-show="cond == 'ds'">
-            <div class="text-center">Your total score:  <span class="score">{{overallScore}}</span>.<br>
-                Your rank amongst other players:
-                <span class="score">{{overallScoreRank || 'unranked'}}.</span>
-            </div>
+        <div ng-show="cond == 'ks'">
+            <!--Thanks for playing! Your efforts will help improve software engineering practices.<br><br>-->
+
+            Your score is <span class="score">{{performance.player}} (Rank: {{overallScoreRank || 'unranked'}})</span>. Can you improve your score?
+
+            <table class="table text-center nostyle">
+                <thead>
+                <tr>
+                    <th class="text-center">Player</th>
+                    <th class="text-center">Earnings</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-show="score.overallScore > 0" ng-repeat="score in scores">
+                    <td>{{ score.user }}</td>
+                    <td>{{ score.overallScore }}</td>
+                </tr>
+                </tbody>
+            </table>
         </div>
+
 
         <div class="text-center" ng-show="cond == 'ko'">
-            Thanks helping software designers
-            solve an important problem!<br>
+            <!--Thanks for playing! Your efforts will help improve software engineering practices.<br><br>-->
 
-            Players collective score: {{performance.allP}}.<br>
-
-            To be the computer, players must score another {{performance.hsim - performance.allP}} points.
+            Players collectively scored {{performance.allP}}. Can you help improve this score?
         </div>
 
-        <div ng-show="cond == 'so'">
-            <div class="text-center">
-                Players collective score: {{performance.allP}} (Your contribution: {{performance.player}}).<br>
-                Your rank amongst other players: <span class="score">{{overallScoreRank || 'unranked'}}</span>.<br>
-                To beat the computer, players must score another {{performance.hsim - performance.allP}} points.
-            </div>
-        </div>
 
         <div ng-show="cond == 'kso'">
             <div class="text-center">
-                Thanks for helping software designers solve a difficult problem! <br>
+                <!--Thanks for playing! Your efforts will help improve software engineering practices.<br><br>-->
 
-                Players collective score: {{performance.allP}} (Your contribution: {{performance.player}}).<br>
-                Your rank amongst other players: <span class="score">{{overallScoreRank || 'unranked'}}</span>.<br>
-                To beat the computer, players must score another {{performance.hsim - performance.allP}} points.</div>
+                Your score is <span class="score">{{performance.player}} (Rank: {{overallScoreRank || 'unranked'}})</span>. Can you improve your score? <br><br>
+
+                Players collectively scored {{performance.allP}}. Can you help improve this score?
+            </div>
+
         </div>
 
-
-        <div ng-show="cond == 'dso'">
+        <div ng-show="cond == 'kos'">
             <div class="text-center">
-                Thanks for helping software designers solve a difficult problem! <br>
+                <!--Thanks for playing! Your efforts will help improve software engineering practices.<br><br>-->
 
-                Players collective score: {{performance.allP}} (Your contribution: {{performance.player}}).<br>
-                Your rank amongst other players: <span class="score">{{overallScoreRank || 'unranked'}}</span>.<br>
-                To beat the computer, players must score another {{performance.hsim - performance.allP}} points.</div>
-        </div>
+                Players collectively scored {{performance.allP}}. Can you help improve this score?<br><br>
 
-        <div ng-show="cond == 'do'">
-            <div class="text-center">
-                Thanks for helping software designers solve a difficult problem! <br>
-
-                Players collective score: {{performance.allP}} (Your contribution: {{performance.player}}).<br>
-                Your rank amongst other players: <span class="score">{{overallScoreRank || 'unranked'}}</span>.<br>
-                To beat the computer, players must score another {{performance.hsim - performance.allP}} points.</div>
+                Your score is <span class="score">{{performance.player}} (Rank: {{overallScoreRank || 'unranked'}})</span>. Can you improve your score?
+            </div>
         </div>
 
         <br>
@@ -72,24 +79,29 @@
         </div>
 
 
-        <div ng-show="cond != 'd' || cond != 'ds' || cond != 'dso' || cond != 'do'" class="a-one animated bounceInDown">
+        <div ng-show="cond == 'ko' || cond == 'kso' || cond == 'kos'" class="a-one animated bounceInDown">
             <div class="hvr-grow-rotate">
                 <div class="landing-item" ui-sref="scoreboard">HALL OF FAME</div>
             </div>
         </div>
 
-        <div ng-show="" class="a-one animated bounceInDown">
+        <div class="a-one animated bounceInDown">
             <div class="hvr-grow-rotate">
                 <div class="landing-item" ui-sref="tip">TIPS</div>
             </div>
         </div>
 
-        <div ng-show="cond != 'd' || cond != 'ds' || cond != 'dso' || cond != 'do'" class="a-one animated bounceInDown">
+        <div class="a-one animated bounceInDown">
             <div class="hvr-grow-rotate">
                 <div class="landing-item" ui-sref="about">ABOUT THE GAME</div>
             </div>
         </div>
 
+        <div class="a-one animated bounceInDown">
+            <div class="hvr-grow-rotate">
+                <div style="color:rgb(0, 242, 255)" class="landing-item" ui-sref="quit">QUIT GAME FOR GOOD</div>
+            </div>
+        </div>
 
     </div>
 </section>

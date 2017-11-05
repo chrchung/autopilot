@@ -93,6 +93,9 @@ app.get('/get_best_solution/:level', function (req, res) {
                 solutionsQuery.equalTo('fake', false);
                 solutionsQuery.notEqualTo('score', null);
                 solutionsQuery.equalTo('level', parseInt(req.params.level));
+
+                var day = new Date('2017-11-04T18:06:43.351Z');
+                solutionsQuery.greaterThanOrEqualTo('createdAt', day);
                 solutionsQuery.descending('score');
                 solutionsQuery.limit(5); //
 
@@ -109,6 +112,9 @@ app.get('/get_best_solution/:level', function (req, res) {
                         var Seeds = Parse.Object.extend('Seeds');
                         var seedsQuery = new Parse.Query(Seeds);
                         seedsQuery.equalTo('level', parseInt(req.params.level));
+
+
+
                         seedsQuery.first({
                             success: function (seed) {
                                 res.json({solution: sol, attempts: user.attributes.numSucAttempts, prevSeeds: seed});
@@ -219,24 +225,36 @@ app.post('/signup_main', function(req, res) {
             data.set('turk', req.body.turk);
             data.set('know', req.body.know);
 
-            var ran = getRandomInt(1, 7);
+            // var ran = getRandomInt(1, 7);
+            //
+            // if (ran == 1){
+            //     data.set('condition', 'd');
+            // } else if (ran == 2) {
+            //     data.set('condition', 'ds');
+            // } else if (ran == 3) {
+            //     data.set('condition', 'ks');
+            // } else if (ran == 4) {
+            //     data.set('condition', 'ko');
+            // } else if (ran == 5) {
+            //     data.set('condition', 'kso');
+            // } else if (ran == 6) {
+            //     data.set('condition', 'dso');
+            // } else if (ran == 7){
+            //     data.set('condition', 'k');
+            // } else {
+            //     data.set('condition', 'do');
+            // }
+
+            var ran = getRandomInt(1, 3);
 
             if (ran == 1){
-                data.set('condition', 'd');
-            } else if (ran == 2) {
-                data.set('condition', 'ds');
-            } else if (ran == 3) {
-                data.set('condition', 'ks');
-            } else if (ran == 4) {
-                data.set('condition', 'ko');
-            } else if (ran == 5) {
-                data.set('condition', 'kso');
-            } else if (ran == 6) {
-                data.set('condition', 'dso');
-            } else if (ran == 7){
                 data.set('condition', 'k');
+            } else if (ran == 2) {
+                data.set('condition', 'ks');
+            } else if (ran == 3) {
+                data.set('condition', 'kso');
             } else {
-                data.set('condition', 'do');
+                data.set('condition', 'kos');
             }
 
             data.save(null, {
