@@ -94,7 +94,7 @@ app.get('/get_best_solution/:level', function (req, res) {
                 solutionsQuery.notEqualTo('score', null);
                 solutionsQuery.equalTo('level', parseInt(req.params.level));
 
-                var day = new Date('2017-11-04T18:06:43.351Z');
+                var day = new Date('2017-11-04T18:06:07.645Z');
                 solutionsQuery.greaterThanOrEqualTo('createdAt', day);
                 solutionsQuery.descending('score');
                 solutionsQuery.limit(5); //
@@ -106,7 +106,7 @@ app.get('/get_best_solution/:level', function (req, res) {
                 // get solutions
                 solutionsQuery.find({
                     success: function (sols) {
-                        var sol = sols[getRandomInt(0, sols.length - 1)];//
+                      //  var sol = sols[getRandomInt(0, sols.length - 1)];//
                         var sol = sols[0];
                         // get seeds
                         var Seeds = Parse.Object.extend('Seeds');

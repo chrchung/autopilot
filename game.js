@@ -1570,18 +1570,29 @@ app.controller('gameCtrl', function($scope, Restangular, $state) {
             seedType = 'size';
             var smallestGroup = getSmallestArray(initialGroups, prevSeeds);
 
-            if (smallestGroup == null) { // if no smallest group => all seeds rotated through so start over
+            if (smallestGroup.length == 0) { // if no smallest group => all seeds rotated through so start over
                 restartSeeds();
                 smallestGroup = getSmallestArray(initialGroups, prevSeeds);
             }
 
-            var ranInt = getRandomInt(0, smallestGroup.length - 1);
-            var ele = smallestGroup[ranInt];
-            addSeed(ele);
-            ele = ele.split('_');
+            if (smallestGroup.length == 0) {
+                seedType = 'ran';
 
-            $scope.seed.model = parseInt(ele[0]);
-            $scope.seed.truepos = parseInt(ele[1]);
+
+
+                $scope.seed.model = getRandomInt(0, $scope.modelNames.length);
+                $scope.seed.truepos = getRandomInt(0, models[$scope.seed.model].length - 1);
+            } else {
+                var ranInt = getRandomInt(0, smallestGroup.length - 1);
+                var ele = smallestGroup[ranInt];
+                addSeed(ele);
+                ele = ele.split('_');
+
+                $scope.seed.model = parseInt(ele[0]);
+                $scope.seed.truepos = parseInt(ele[1]);
+            }
+
+
         // }
             // else if (tut < 5) {
         //     var temp = tutSeed.split('_');
@@ -1633,7 +1644,7 @@ app.controller('gameCtrl', function($scope, Restangular, $state) {
                     start(); //start game when all images have loaded
                 }
             };
-            img.src = 'https://anonymoususer12.github.io/alien/' + i + '.png';
+            img.src = 'https://chrchung.github.io/Creatures/' + i + '.png';
             img.width = dim;
             img.height = dim;
             images.push(img);
@@ -2279,7 +2290,7 @@ app.controller('gameCtrl', function($scope, Restangular, $state) {
             }
         }
 
-        return a[index];
+        return a[index] || [];
     }
 
     function shuffle(array) {
