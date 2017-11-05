@@ -655,24 +655,47 @@ app.get('/get_scoreboard', function (req, res) {
 });
 
 app.post('/save_trace', function (req, res) {
-    var Traces = Parse.Object.extend('Traces');
+    var Solutions = Parse.Object.extend('Traces');
+    var sol = new Solutions();
 
-    var Solutions = Parse.Object.extend('Solutions');
-    var solutionsQuery = new Parse.Query(Solutions);
-    solutionsQuery.descending('createdAt');
-    solutionsQuery.equalTo('user', req.session.user.username);
+            var solution = req.body.solution;
+            var score = req.body.score;
+            var seed = req.body.seed;
+            var level = req.body.level;
+            var username = req.session.user.username;
 
-    solutionsQuery.first({
-        success: function (sol) {
-            var trace = new Traces();
-            trace.set('user', username);
-            trace.set('solution', sol);
+            sol.set('user', username);
+            sol.set('solution', solution);
+            sol.set('score', score);
+            sol.set('level', level);
+            sol.set('initialScore', req.body.initialScore);
+            sol.set('targetScore', req.body.targetScore);
+            sol.set('duration', req.body.duration);
+            sol.set('seed', seed);
+            sol.set('type', req.body.type);
+            sol.set('fake', req.body.fake);
+            sol.set('isMobile', req.body.isMobile);
+            sol.set('trace', req.body.traces);
 
-        },
-        error: function() {
-            res.send(400).end();
-        }
-    });
+            sol.save(null, {
+                success: function (gameScore) {
+                    res.status(200).end();
+                },
+                error: function (gameScore, error) {
+                    res.status(400).end();
+                }
+            });
+
+
+            solution.save(null, {
+                success: function (data) {
+                    res.status(200).end();
+                },
+                error: function (data, error) {
+                    res.status(400).end();
+                }
+            });
+
 });
 
 

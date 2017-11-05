@@ -1147,7 +1147,7 @@ app.controller('gameCtrl', function($scope, Restangular, $state) {
     };
 
     // Randomly pick a level
-    var randLev = 0;
+    var randLev = Math.random();
     if (randLev <= 0.25) {
         var level = 1;
         var positions = hospitalPos;
@@ -1174,7 +1174,6 @@ app.controller('gameCtrl', function($scope, Restangular, $state) {
     $scope.models = models;
     $scope.fake = true; // to specify whether level is fake level. not used at the moment.
     $scope.leeway = 1.0; // not used at the moment
-
     // names of each model
     $scope.modelNames = shuffle($scope.modelNames); // randomize the order for which models appear in game
     $scope.positions = positions;
@@ -1198,6 +1197,7 @@ app.controller('gameCtrl', function($scope, Restangular, $state) {
         truepos: null // true position of the element, i.e. its index within the "models" array.
     };
 
+    var traces = [];
 
     // track index of scroll buttons
     $scope.scroll = {counter: 0, max: modelWithMaxLength()};
@@ -1378,6 +1378,8 @@ app.controller('gameCtrl', function($scope, Restangular, $state) {
     }
 
     $scope.getSuggestion = function (dir) {
+        addTrace('s' + dir);
+
         // get a suggestion based on counter value
 
         if (dir == '-') { // check if can still move (i.e. there are still elements to be seen in dir -)
@@ -1426,9 +1428,12 @@ app.controller('gameCtrl', function($scope, Restangular, $state) {
         if (positions[model].reorder == 1) {
             positions[model].reorder = -1;
             $('#reorder_' + model).removeClass('green');
+
+            addTrace('t' + model + '_' + positions[model].truepos + '-');
         } else if (positions[model].reorder == -1) {
             positions[model].reorder = 1;
             $('#reorder_' + model).addClass('green');
+            addTrace('t' + model + '_' + positions[model].truepos + '+');
 
         }
 
@@ -1667,6 +1672,8 @@ app.controller('gameCtrl', function($scope, Restangular, $state) {
 
     // rotate through models
     $scope.getNextAll = function(dir) {
+        addTrace('n' + dir)
+
         if ($scope.scroll.max == -1) {
             return;
         }
@@ -1763,12 +1770,16 @@ app.controller('gameCtrl', function($scope, Restangular, $state) {
 
     // toggle the selection
     $scope.select = function (model) {
+
         // can't deselect seed
         if ($scope.seed.model == model) {
             return;
         }
 
         toggleModel(model, false);
+
+        addTrace('s' + model + '_' + positions[model].truepos);
+
     };
 
 
@@ -1828,6 +1839,24 @@ app.controller('gameCtrl', function($scope, Restangular, $state) {
                 } else {
                     $scope.end = 2;
                 }
+
+
+                Restangular.all('/save_trace').post({
+                    score: calculateOverallScore(cur, initialGroups),
+                    initialScore: initialScore,
+                    targetScore: $scope.target,
+                    seed: $scope.seed.model + '_' + $scope.seed.pos,
+                    duration: (new Date()).getTime() - startTime,
+                    level: level,
+                    solution: solution,
+                    type: seedType,
+                    fake: $scope.fake,
+                    isMobile: isMobile,
+                    traces: traces
+                }).then((function (data) {
+
+                }), function (err) {
+                });
             });
         }), function (err) {
         });
@@ -2131,7 +2160,7 @@ app.controller('gameCtrl', function($scope, Restangular, $state) {
         c.width = 30 + eles.width;
 
         con.drawImage(eles, 0, 0);
-        if ($scope.seed.model == model && $scope.seed.pos == positions[model].pos) {
+        if ($scope.seed.model == model && $scope.seed.pos == positions[model].pos || models[model][positions[model].pos].color == null) {
             con.fillStyle = "white";
         } else {
             con.fillStyle = models[model][positions[model].pos].color;
@@ -2369,7 +2398,29 @@ app.controller('gameCtrl', function($scope, Restangular, $state) {
 
     ///// PLAYER TRACES /////////
 
-    function addTrace() {
+    function addTrace(s) {
+        traces.push(s);
+
+        if (traces.length == 30) {
+            Restangular.all('/save_trace').post({
+                score: calculateOverallScore(cur, initialGroups),
+                initialScore: initialScore,
+                targetScore: $scope.target,
+                seed: $scope.seed.model + '_' + $scope.seed.pos,
+                duration: (new Date()).getTime() - startTime,
+                level: level,
+                solution: solution,
+                type: seedType,
+                fake: $scope.fake,
+                isMobile: isMobile,
+                trace: traces
+            }).then((function (data) {
+
+            }), function (err) {
+            });
+
+
+        }
 
     }
 
