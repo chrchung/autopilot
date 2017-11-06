@@ -9,57 +9,34 @@
 <section class="landing background">
     <div class="landing-container text-center">
 
-        <div ng-show="cond == 'k'">
-            Thanks for playing! Your efforts will help improve software engineering practices.<br><br>
-        </div>
+        Thanks for playing!
+        By helping the Blobs find friends, your efforts will help improve software engineering practices.<br><br>
 
         <div ng-show="cond == 'ks'">
-            Thanks for playing! Your efforts will help improve software engineering practices.<br><br>
-
-            Your score is <span class="score">{{performance.player}} (Rank: {{overallScoreRank || 'unranked'}})</span>. Can you improve your score?
-
-            <table class="table text-center nostyle">
-                <thead>
-                <tr>
-                    <th class="text-center">Player</th>
-                    <th class="text-center">Earnings</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-show="score.overallScore > 0" ng-repeat="score in scores">
-                    <td>{{ score.user }}</td>
-                    <td>{{ score.overallScore }}</td>
-                </tr>
-                </tbody>
-            </table>
+            Do you think you have what it takes to become the top matchmaker?
         </div>
 
 
         <div class="text-center" ng-show="cond == 'ko'">
-            Thanks for playing! Your efforts will help improve software engineering practices.<br><br>
-
-            Players collectively scored {{performance.allP}}. Can you help improve this score?
+            You will be working with other players to build bigger and better solutions to our problem!<br>
+            Can you help improve the previous solutions of other players?
         </div>
 
 
         <div ng-show="cond == 'kso'">
             <div class="text-center">
-                Thanks for playing! Your efforts will help improve software engineering practices.<br><br>
-
-                Your score is <span class="score">{{performance.player}} (Rank: {{overallScoreRank || 'unranked'}})</span>. Can you improve your score? <br><br>
-
-                Players collectively scored {{performance.allP}}. Can you help improve this score?
+                Do you think you have what it takes to become our top player?<br><br>
+                You will be working with other players to build bigger and better solutions to our problem!<br>
+                Can you help improve the previous solutions of other players?
             </div>
 
         </div>
 
         <div ng-show="cond == 'kos'">
             <div class="text-center">
-                Thanks for playing! Your efforts will help improve software engineering practices.<br><br>
-
-                Players collectively scored {{performance.allP}}. Can you help improve this score?<br><br>
-
-                Your score is <span class="score">{{performance.player}} (Rank: {{overallScoreRank || 'unranked'}})</span>. Can you improve your score?
+                You will be working with other players to build bigger and better solutions to our problem!<br>
+                Can you help improve the previous solutions of other players?<br><br>
+                Do you think you have what it takes to become our top player?
             </div>
         </div>
 
