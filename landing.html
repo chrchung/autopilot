@@ -8,12 +8,12 @@
 
 <section class="landing background">
     <div class="landing-container text-center">
-
         Thanks for playing!
-        By helping the Blobs find friends, your efforts will help improve software engineering practices.<br><br>
+        your efforts will help improve software engineering practices <a ui-sref="about" style="" >[learn more]</a>.<br><br>
 
         <div ng-show="cond == 'ks'">
-            Do you think you have what it takes to become the top matchmaker?
+            Do you think you have what it takes to become the top matchmaker?<br>
+            Your score is <span class="score">{{performance.player}} (Rank: {{overallScoreRank || 'unranked'}})</span>.
         </div>
 
 
@@ -25,9 +25,12 @@
 
         <div ng-show="cond == 'kso'">
             <div class="text-center">
-                Do you think you have what it takes to become our top player?<br><br>
+                Do you think you have what it takes to become our top player?<br>
+                Your score is <span class="score">{{performance.player}} (Rank: {{overallScoreRank || 'unranked'}})</span>.
+                <br><br>
                 You will be working with other players to build bigger and better solutions to our problem!<br>
-                Can you help improve the previous solutions of other players?
+                Can you help improve the previous solutions of other players? <br><br>
+
             </div>
 
         </div>
@@ -36,11 +39,11 @@
             <div class="text-center">
                 You will be working with other players to build bigger and better solutions to our problem!<br>
                 Can you help improve the previous solutions of other players?<br><br>
-                Do you think you have what it takes to become our top player?
+                Do you think you have what it takes to become our top player?<br>
+                Your score is <span class="score">{{performance.player}} (Rank: {{overallScoreRank || 'unranked'}})</span>.
             </div>
         </div>
 
-        <br>
 
         <div class="inline a-one animated bounceInDown">
             <div class="hvr-grow-rotate">
@@ -62,17 +65,17 @@
             </div>
         </div>
 
-        <div class="a-one animated bounceInDown">
-            <div class="hvr-grow-rotate">
-                <div class="landing-item" ui-sref="tip">TIPS</div>
-            </div>
-        </div>
+        <!--<div class="a-one animated bounceInDown">-->
+            <!--<div class="hvr-grow-rotate">-->
+                <!--<div class="landing-item" ui-sref="tip">TIPS</div>-->
+            <!--</div>-->
+        <!--</div>-->
 
-        <div class="a-one animated bounceInDown">
-            <div class="hvr-grow-rotate">
-                <div class="landing-item" ui-sref="about">ABOUT THE GAME</div>
-            </div>
-        </div>
+        <!--<div class="a-one animated bounceInDown">-->
+            <!--<div class="hvr-grow-rotate">-->
+                <!--<div class="landing-item" ui-sref="about">ABOUT THE GAME</div>-->
+            <!--</div>-->
+        <!--</div>-->
 
         <div class="a-one animated bounceInDown">
             <div class="hvr-grow-rotate">

@@ -1,193 +1,95 @@
 <section id="tutorial" style="margin-left:7px;margin-right:7px;margin-top:7px;">
 
     <div ng-show="tutState == 0" class="tut-text">
-        Welcome to MATCHMAKERS! <span ng-show="cond == 'kso' || cond == 'ks' || cond == 'ko' || cond == 'k'">The game encodes a complex problem known as n-way matching that is used to design software systems.
-        To learn more about the game’s underlying purpose, visit <a ui-sref="about">here</a>. </span>
+        Welcome to Beatlejuice, a planet occupied by a sole species known as Blobs. Let's get you acquainted with
+        the Blobs.
 
         <div class="text-center">
-            <button ng-click="next(0)" class="big-button ui black button">Next</button>
+            <button ng-click="next(1)" class="big-button ui black icon button"><i class="right chevron icon"></i></button>
         </div>
     </div>
 
 
     <div ng-show="tutState == 1" class="tut-text">
         <div>
-            This is an element: <img style="height:10vh" src="assets/images/0_0.png"/>.
-            An element is composed of several creatures. This element has a <img style="height:10vh" src="https://chrchung.github.io/Creatures/66.png"/>,
-            <img style="height:10vh" src="https://chrchung.github.io/Creatures/73.png"/>, <img style="height:10vh" src="https://chrchung.github.io/Creatures/101.png"/>, and
-            <img style="height:10vh" src="https://chrchung.github.io/Creatures/136.png"/>.
-        </div>
+            Here are four Blobs: <br>
+            <ol>
+                <li>Asako: <img style="height:10vh" src="https://chrchung.github.io/Creatures/66.png"/></li>
+                <li>Amit: <img style="height:10vh" src="https://chrchung.github.io/Creatures/73.png"/></li>
+                <li>Catherine: <img style="height:10vh" src="https://chrchung.github.io/Creatures/101.png"/></li>
+                <li>And finally, Elsie: <img style="height:10vh" src="https://chrchung.github.io/Creatures/136.png"/></li>
 
-        <div class="text-center">
-            <button ng-click="next(1)" class="big-button ui black button">Next</button>
+            </ol>
+
+            Blobs are social creatures and prefer sticking together as Blob Clusters. In fact, Asako, Amit, Catherine and Elsie co-exist as a Blob Cluster:
+            <img style="height:10vh" src="assets/images/0_0.png"/>
+        </div>
+        <br>
+        <div class="text-center ui buttons">
+            <button ng-click="next(0)" class="big-button ui black icon button"><i class="left chevron icon"></i></button>
+            <button ng-click="next(2)" class="big-button ui black icon button"><i class="right chevron icon"></i></button>
         </div>
 
     </div>
 
-    <div ng-show="tutState == 2" class="tut-text">
-        <div>
-            <img style="margin-left:35%;width:30%" src="assets/images/fam.png"/><br>
-            The image above depicts a family.
-            A family is composed of several elements. This family contains elements
-            contains <img style="height:10vh" src="assets/images/0_0.png"/>, <img style="height:10vh" src="assets/images/0_1.png"/>, and
-            <img style="height:10vh" src="assets/images/0_2.png"/>.
-        </div>
+    <!--<div ng-show="tutState == 2" class="tut-text">-->
+        <!--Your goal is to group similar Blob Clusters together, so they can co-exist as friends.-->
 
-        <div class="text-center">
-            <button ng-click="next(2)" class="big-button ui black button">Next</button>
-        </div>
-    </div>
+        <!--<div class="text-center">-->
+            <!--<button ng-click="next(2)" class="big-button ui black button">Next</button>-->
+        <!--</div>-->
+    <!--</div>-->
 
 
-    <div ng-show="tutState == 3" class="tut-text">
-        <div>
-            Elements are similar if they have common creatures.<br>
-            Elements <img style="height:10vh" src="assets/images/0_0.png"/> and <img style="height:10vh" src="assets/images/2_1.png"/> are similar because they both have
-            <img style="height:10vh" src="https://chrchung.github.io/Creatures/66.png"/>, <img style="height:10vh" src="https://chrchung.github.io/Creatures/101.png"/>, and
-            <img style="height:10vh" src="https://chrchung.github.io/Creatures/136.png"/>.
-        </div>
+    <!--<div ng-show="tutState == 3" class="tut-text">-->
+        <!--<div>-->
+            <!--Blob clusters are <strong>similar</strong> if they have common creatures.<br>-->
+            <!--For instance, <img style="height:10vh" src="assets/images/0_0.png"/> and <img style="height:10vh" src="assets/images/2_1.png"/> <br>-->
+            <!--are similar because they both have-->
+            <!--<img style="height:10vh" src="https://chrchung.github.io/Creatures/66.png"/>, <img style="height:10vh" src="https://chrchung.github.io/Creatures/101.png"/>, and-->
+            <!--<img style="height:10vh" src="https://chrchung.github.io/Creatures/136.png"/>.-->
+        <!--</div>-->
 
-        <div class="text-center">
-            <button ng-click="next(3)" class="big-button ui black button">Next</button>
-        </div>
-    </div>
+        <!--<div class="text-center">-->
+            <!--<button ng-click="next(3)" class="big-button ui black button">Next</button>-->
+        <!--</div>-->
+    <!--</div>-->
 
-
-    <div ng-show="tutState == 4" class="tut-text">
-
-        <div>
-            <img style="margin-left:35%;width:30%" src="assets/images/fams.png"/><br>
-            There are four families shown in the image above.
-            Below, these families have been organized into rows.
-            Your goal is to make the element in the first row happy, by helping it
-            make a group of friends with elements in other families. An element is a good
-            candidate for being a friend if it shares many common creatures with the
-            groups of friends that you've created.
-
-            Ultimately, your goal is to
-            reach the target "Happiness" score shown on the bottom right of the screen.
-        </div>
-
-
-        <div class="text-center">
-            <button ng-click="next(4)" class="big-button ui black button">Next</button>
-        </div>
-    </div>
-
-
-    <div ng-show="tutState == 5" class="tut-text">
-        <div>
-            Scroll through elements with the blue left and right arrows keys located
-            on the bottom right:
-            <img style="margin-left:35%;width:30%" src="assets/images/arrow.png"/><br>
-
-            To make it easier for you to discern the elements,
-            we've highlighted shared creatures with your groups of friends in blue.
-            <br>
-            Toggle the selection of elements by clicking on them.
-            <br>
-            Please attempt to reach the target score at
-            the top of the screen now.
-
-            <a href="" ng-click="hint = true">[Hint]</a>
-            <div ng-show="hint">
-                Add the 2nd element in row 2.
-            </div>
-        </div>
-    </div>
-
-    <div ng-show="tutState == 6" class="tut-text">
-        <div>
-            Elements will often already belong to a group of friends.
-            Friends are indicated by the colored bars to the right of each element, i.e. <img src="assets/images/indic.png">.
-            For instance, the elements in row 2 and row 4 a friends because their bars have the same color.
-
-            Elements that already belong to a group of friends may happy with their
-            current friends and be disinclined to leave.
-            Therefore, even if these elements are highly similar to the group you are building,
-            your happiness score may still decrease.
-
-            An element's happiness is indicated with happiness bars i.e. <img src="assets/images/happy.png">, which are located to the left of every
-            element. Elements that have high happiness bars a disinclined to leave their group of friends.
-
-            <strong>Lookout for elements that have low happiness and are highly similar to your current group as they
-                have a good chance of improving your score.</strong>
-
-            Try to add elements with low happiness bars to reach the target score. <a href=""
-                                                                                               ng-click="hint = true">[Hint]</a>
-            <div ng-show="hint">
-                Add the 1st element in row 3.
-                Add the 2nd element from row 2.
-            </div>
-        </div>
-    </div>
-
-    <div ng-show="tutState == 7" class="tut-text">
-        <div>
-            Scroll through suggested groups of friends to add to your group using the teal left and right arrows: <img style="height:10vh"  src="assets/images/suggest.png">.
-            Suggested elements are indicated with black bar to the right of the element i.e. <img src="assets/images/suggest2.png"/>.
-            Using the suggested elements, try to beat the target score. Try different combinations of suggested elements.
-        </div>
-    </div>
-
-    <div ng-show="tutState == 8" class="tut-text">
-        <div>
-            You can reorder the rows so that they are sorted based on the checked-marked elements <img style="height:10vh" src="assets/images/checked.png">.
-            Using this new tool, try to beat the target score once more!
-        </div>
-    </div>
-
-    <div ng-show="tutState == 9"  class="tut-text">
-        You are now ready to play! Here are some effective strategies for playing the game:
-
-        - look out for highly similar elements with low happiness
-        - make use of the check marks to reorder the rows to find good candidates to add to your group
-        - make use of the suggestion bar, try different combinations of the suggested groups and combine with elements
-        in other groups
-        - allow your score to decrease. Sometimes, a good candidate can make your score decrease, but adding in other elements
-        i.e. suggested ones or those highly similar to it will improve your score.
-
-
-        <div class="text-center">
-            <button ng-click="end()" class="big-button ui black button">Play</button>
-        </div>
-    </div>
-
-
-    <div id="game-panel">
-        <div style="float:right;" class="">
-            <div id="happiness" style="">
-                <div>Happiness:</div>
-                <div>{{ score }}/{{ target * leeway }}</div>
-            </div>
-            <div id="sugg">
-                <div id="suggest" style="" class="med-button ui teal buttons">
-                    <button ng-click="getSuggestion('-')" class="ui black icon button" style=""><i
-                            class="pointing left icon"></i></button>
-                    <button style="min-width:95px;border-width:1px;border-style:solid;background-color:white;cursor:default;color:#00B5AD;"
-                            class="ui button"><span ng-show="suggestions.suggestionList.length == 0">None</span><span
-                            ng-show=suggestions.suggestionList.length !=0">{{(suggestions.counter + 1|| 0)}} / {{suggestions.suggestionList.length}}</span>
-                    </button>
-                    <button ng-click="getSuggestion('+')" class="ui black icon button" style=""><i
-                            class="pointing right icon"></i></button>
+    <div id="panel" style="border:solid; width:50%;margin:auto">
+        <div id="game-panel" style="float:right;position:relative">
+            <div style="" class="">
+                <div id="happiness" style="">
+                    <div>Happiness:</div>
+                    <div>{{ score }}/{{ target * leeway }}</div>
                 </div>
-                <br>
-                <div style="" class="med-button ui blue buttons">
-                    <button ng-click="getNextAll('-')" class="ui black icon button" style=""><i
-                            class="pointing left icon"></i></button>
-                    <button style="min-width:95px;border-width:1px;border-style:solid;background-color:white;cursor:default;color:#2185d0;"
-                            class="ui button"><span ng-show="scroll.max == -1">0/0</span><span
-                            ng-show="scroll.max != -1">{{scroll.counter + 1}} / {{models[scroll.max].length}}</span>
-                    </button>
-                    <button ng-click="getNextAll('+')" class="ui black icon button" style=""><i
-                            class="pointing right icon"></i></button>
-                </div>
+                <div id="sugg">
+                    <!--<div id="suggest" style="" class="med-button ui teal buttons">-->
+                    <!--<button ng-click="getSuggestion('-')" class="ui black icon button" style=""><i-->
+                    <!--class="pointing left icon"></i></button>-->
+                    <!--<button style="min-width:95px;border-width:1px;border-style:solid;background-color:white;cursor:default;color:#00B5AD;"-->
+                    <!--class="ui button"><span ng-show="suggestions.suggestionList.length == 0">None</span><span-->
+                    <!--ng-show=suggestions.suggestionList.length !=0">{{(suggestions.counter + 1|| 0)}} / {{suggestions.suggestionList.length}}</span>-->
+                    <!--</button>-->
+                    <!--<button ng-click="getSuggestion('+')" class="ui black icon button" style=""><i-->
+                    <!--class="pointing right icon"></i></button>-->
+                    <!--</div>-->
+                    <!--<br>-->
+                    <div style="" class="med-button ui blue buttons">
+                        <button ng-click="getNextAll('-')" class="ui black icon button" style=""><i
+                                class="pointing left icon"></i></button>
+                        <button style="min-width:95px;border-width:1px;border-style:solid;background-color:white;cursor:default;color:#2185d0;"
+                                class="ui button"><span ng-show="scroll.max == -1">0/0</span><span
+                                ng-show="scroll.max != -1">{{scroll.counter + 1}} / {{models[scroll.max].length}}</span>
+                        </button>
+                        <button ng-click="getNextAll('+')" class="ui black icon button" style=""><i
+                                class="pointing right icon"></i></button>
+                    </div>
 
+                </div>
             </div>
         </div>
-    </div>
 
-    <div id="ele-panel" style="margin-left:7px;margin-right:7px;margin-top:7px">
+        <div id="ele-panel" style="margin-left:7px;margin-right:7px;margin-top:7px">
             <table class="eles" style="" class="nostyle">
                 <tr style="" ng-repeat="model in modelNames">
                     <td style="margin-right: 5px;margin-top:5px;" class="scrolls ui buttons">
@@ -211,7 +113,169 @@
                     </td>
                 </tr>
             </table>
+        </div>
     </div>
+
+
+
+    <div ng-show="tutState == 2" class="tut-text">
+
+        <div>
+            Shown above is the game screen. <br>
+            Each row contains a Blob Clusters. Scroll through them using the blue left/right arrow buttons: <img style="width:30%" src="assets/images/arrow.png"/><br>
+
+            The Blob Cluster on the first row is in need of your help. It is unhappy. <br>
+            You can help increase its happiness by helping it form a Blob Supercluster, <br>
+            by grouping it with <strong>similar</strong> Blob Clusters.<br>
+        </div>
+
+        <br>
+
+        <div class="text-center ui buttons">
+            <button ng-click="next(1)" class="big-button ui black icon button"><i class="left chevron icon"></i></button>
+            <button ng-click="next(3)" class="big-button ui black icon button"><i class="right chevron icon"></i></button>
+        </div>
+
+    </div>
+
+
+
+    <div ng-show="tutState == 3" class="tut-text">
+        <div>
+            Blob clusters are similar if they have common creatures.<br><br>
+            For instance, <img style="height:10vh" src="assets/images/0_0.png"/> and <img style="height:10vh" src="assets/images/2_1.png"/> <br>
+            are similar because they both have
+            <img style="height:10vh" src="https://chrchung.github.io/Creatures/66.png"/>, <img style="height:10vh" src="https://chrchung.github.io/Creatures/101.png"/>, and
+            <img style="height:10vh" src="https://chrchung.github.io/Creatures/136.png"/>.<br><br>
+
+
+            Ultimately, your goal is to reach the ‘Happiness’ score (1 in this case) <br>
+            that is shown on the bottom right of the game screen.<br>
+        </div>
+
+        <br>
+
+        <div class="text-center ui buttons">
+            <button ng-click="next(2)" class="big-button ui black icon button"><i class="left chevron icon"></i></button>
+            <button ng-click="next(4)" class="big-button ui black icon button"><i class="right chevron icon"></i></button>
+        </div>
+    </div>
+
+
+
+    <div ng-show="tutState == 4" class="tut-text">
+        <div>
+            Blobs that are in your Blob Supercluster are highlighted in blue,
+            and Blobs that are in <strong>many</strong> elements of the Supercluster
+            are highlighted with a more saturated blue.
+        </div>
+
+        <br>
+        <div class="text-center ui buttons">
+            <button ng-click="next(3)" class="big-button ui black icon button"><i class="left chevron icon"></i></button>
+            <button ng-click="next(5)" class="big-button ui black icon button"><i class="right chevron icon"></i></button>
+        </div>
+
+    </div>
+
+
+
+
+    <div ng-show="tutState == 5" class="tut-text">
+        <div>
+            Please attempt to reach the 'Happiness' score now, by helping the Blob Cluster
+            in the first row form a Blob Supercluster, that is a grouping of Blob Clusters.
+
+            <a href=""  ng-click="hint = true">[Hint]</a>
+            <div ng-show="hint">
+                Add the 2nd element in row 2.
+            </div>
+        </div>
+    </div>
+
+    <div ng-show="tutState == 6" class="tut-text">
+        <div>
+            Blob Clusters will often already belong to a Supercluster.<br>
+            The different Superclusters are labelled using coloured bars to the right of each element.
+            For instance, the elements in row 2 and row 4 a friends because their bars have the same color.
+
+            Blob Clusters that already belong to a Supercluster may be happy and disinclined to leave.
+            Therefore, even if these Blob Clusters are similar to the Supercluster you are building,
+            your happiness score may still decrease.
+
+            A Blob Cluster's happiness is indicated by a happiness bar on its left, like so: <img src="assets/images/happy.png">.
+            A fully red bar indicates a very happy Blob Cluster.<br>
+
+
+            <strong>Lookout for Clusters that have low happiness and are highly similar to your Supercluster as they
+                have a good chance of improving your score.</strong><br>
+
+
+            Try to add elements with low happiness bars to reach the target score. <a href=""
+                                                                                      ng-click="hint = true">[Hint]</a>
+            <div ng-show="hint">
+                Add the 1st element in row 3.
+                Add the 2nd element from row 2.
+            </div>
+        </div>
+    </div>
+
+
+    <!--<div ng-show="tutState == 7" class="tut-text">-->
+    <!--<div>-->
+    <!--Scroll through suggested groups of friends to add to your group using the teal left and right arrows: <img style="height:10vh"  src="assets/images/suggest.png">.-->
+    <!--Suggested elements are indicated with black bar to the right of the element i.e. <img src="assets/images/suggest2.png"/>.-->
+    <!--Using the suggested elements, try to beat the target score. Try different combinations of suggested elements.-->
+
+
+
+    <!--Scroll through groups of similar elements to add to your group using the teal left and right arrows. Suggested elements are labelled with a black bar to the right of the element i.e.-->
+    <!--Using the suggested elements, try to beat the target score. Try different combinations of the suggested elements.-->
+    <!--</div>-->
+    <!--</div>-->
+
+
+    <!--<div ng-show="tutState == 7" class="tut-text">-->
+    <!--<div>-->
+    <!--Scroll through suggested groups of friends to add to your group using the teal left and right arrows: <img style="height:10vh"  src="assets/images/suggest.png">.-->
+    <!--Suggested elements are indicated with black bar to the right of the element i.e. <img src="assets/images/suggest2.png"/>.-->
+    <!--Using the suggested elements, try to beat the target score. Try different combinations of suggested elements.-->
+
+
+
+    <!--Scroll through groups of similar elements to add to your group using the teal left and right arrows. Suggested elements are labelled with a black bar to the right of the element i.e.-->
+    <!--Using the suggested elements, try to beat the target score. Try different combinations of the suggested elements.-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <div ng-show="tutState == 7" class="tut-text">
+        <div>
+
+            You can reorder the Blob Clusters in each row so that they are sorted based on those that have been check-marked  <img style="height:10vh" src="assets/images/checked.png">.
+            This will help you identify the Blob Clusters that are most similar to those in your Supercluster.
+            Using this feature, try your hand at beating the target score once more!
+        </div>
+    </div>
+
+    <div ng-show="tutState == 8"  class="tut-text">
+        You are now ready to play!
+
+        <!--Here are some effective strategies for playing the game:-->
+
+        <!-- - look out for highly similar elements with low happiness-->
+        <!-- - make use of the check marks to reorder the rows to find good candidates to add to your group-->
+        <!-- - make use of the suggestion bar, try different combinations of the suggested groups and combine with elements-->
+        <!--in other groups-->
+        <!-- - allow your score to decrease. Sometimes, a good candidate can make your score decrease, but adding in other elements-->
+        <!--i.e. suggested ones or those highly similar to it will improve your score.-->
+
+
+        <div class="text-center">
+            <button ng-click="end()" class="big-button ui black button">Play</button>
+        </div>
+    </div>
+
+
 </section>
 
 
@@ -219,7 +283,7 @@
     <div style="width:50%;height:50%;border-radius:10px;background:white;opacity:1.0;display:flex;justify-content:center;align-items:center;flex-direction:column">
         <div>Congrats! You've reached the target score.</div>
         <br>
-        <button ng-click="next(0)" class="big-button ui black icon button">Next</button>
+        <button ng-click="next('+')" class="big-button ui black icon button"><i class="right chevron icon"></i></button>
     </div>
 
 </div>

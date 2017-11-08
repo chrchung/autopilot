@@ -81,10 +81,26 @@
 <div ng-show="end == 2 || end == 3" style="top:0;bottom:0;left:0;right:0;position:absolute;background-color:rgba(255,255,255,0.5)">
     <div class="game-big-pop" class="text-center" style="">
         Thanks for playing!
-        By helping the Blobs find friends, your efforts will help improve software engineering practices.<br><br>
+        Your efforts will <a style="color:rgb(0, 242, 255)" ui-sref="about">help improve software engineering practices</a>.<br><br>
 
         <div ng-show="cond == 'ks'">
             Do you think you have what it takes to become the top matchmaker?
+
+            Your score is <span class="score">{{performance.player}} (Rank: {{overallScoreRank || 'unranked'}})</span>.<br>
+            <table class="table text-center nostyle">
+                <thead>
+                <tr>
+                    <th class="text-center">Player</th>
+                    <th class="text-center">Score</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-show="score.overallScore > 0" ng-repeat="score in scores">
+                    <td>{{ score.user }}</td>
+                    <td>{{ score.overallScore }}</td>
+                </tr>
+                </tbody>
+            </table>
         </div>
 
 
@@ -98,9 +114,9 @@
             <div class="text-center">
                 Do you think you have what it takes to become our top player?<br><br>
                 You will be working with other players to build bigger and better solutions to our problem!<br>
-                Can you help improve the previous solutions of other players?
+                Can you help improve the previous solutions of other players?<br>
 
-
+                Your score is <span class="score">{{performance.player}} (Rank: {{overallScoreRank || 'unranked'}})</span>.<br>
                 <table class="table text-center nostyle">
                     <thead>
                     <tr>
@@ -125,6 +141,9 @@
                 Can you help improve the previous solutions of other players?<br><br>
                 Do you think you have what it takes to become our top player?
 
+                <br>
+
+                Your score is <span class="score">{{performance.player}} (Rank: {{overallScoreRank || 'unranked'}})</span>.<br>
 
                 <table class="table text-center nostyle">
                     <thead>
@@ -160,12 +179,12 @@
     </div>
     <div style="" class="">
         <div id="sugg">
-            <div style="" class="med-button ui buttons">
-                <button ng-click="getSuggestion('-')" class="ui black icon button" style=""><i class="pointing left icon"></i></button>
-                <button style="min-width:95px;border-width:1px;border-style:solid;background-color:white;cursor:default;color:black;" class="ui button"><span ng-show="suggestions.suggestionList.length == 0">None</span><span ng-show=suggestions.suggestionList.length != 0">{{(suggestions.counter + 1|| 0)}} / {{suggestions.suggestionList.length}}</span></button>
-                <button ng-click="getSuggestion('+')" class=" ui black icon button" style=""><i class="pointing right icon"></i></button>
-            </div>
-            <br>
+            <!--<div style="" class="med-button ui buttons">-->
+                <!--<button ng-click="getSuggestion('-')" class="ui black icon button" style=""><i class="pointing left icon"></i></button>-->
+                <!--<button style="min-width:95px;border-width:1px;border-style:solid;background-color:white;cursor:default;color:black;" class="ui button"><span ng-show="suggestions.suggestionList.length == 0">None</span><span ng-show=suggestions.suggestionList.length != 0">{{(suggestions.counter + 1|| 0)}} / {{suggestions.suggestionList.length}}</span></button>-->
+                <!--<button ng-click="getSuggestion('+')" class=" ui black icon button" style=""><i class="pointing right icon"></i></button>-->
+            <!--</div>-->
+            <!--<br>-->
             <div style="" class="med-button ui buttons">
                 <button ng-click="getNextAll('-')" class="ui black icon button" style=""><i class="pointing left icon"></i></button>
                 <button style="min-width:95px;border-width:1px;border-style:solid;background-color:white;cursor:default;color:black;" class="ui button"><span ng-show="scroll.max == -1">0/0</span><span ng-show="scroll.max != -1">{{scroll.counter + 1}} / {{models[scroll.max].length}}</span></button>

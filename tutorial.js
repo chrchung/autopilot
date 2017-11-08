@@ -1251,8 +1251,11 @@ app.controller('tutorialCtrl', function($scope, Restangular, $state) {
 
         $('#done').hide();
 
-        $scope.tutState ++;
-
+        if (state == '+') {
+            $scope.tutState ++;
+        } else {
+            $scope.tutState = state;
+        }
 
         if ($scope.tutState > $scope.states.length - 1) {
             return;
@@ -1260,12 +1263,10 @@ app.controller('tutorialCtrl', function($scope, Restangular, $state) {
 
 
             if ($scope.states[$scope.tutState].showGame) {
-                $('#game-panel').show();
-                $('#ele-panel').show();
+                $('#panel').show();
                 start();
             } else {
-                $('#game-panel').hide();
-                $('#ele-panel').hide();
+                $('#panel').hide();
             }
 
             if ($scope.states[$scope.tutState].suggest) {
@@ -1279,12 +1280,12 @@ app.controller('tutorialCtrl', function($scope, Restangular, $state) {
     $scope.states = [
         {showGame: false, highlight: false, friends: false, suggest: false, checks: false, initialGroups: [], seed: '0_0'},
         {showGame: false, highlight: false, friends: false, suggest: false, checks: false, initialGroups: [], seed: '0_0'},
-        {showGame: false, highlight: false, friends: false, suggest: false, checks: false, initialGroups: [], seed: '0_0'},
-        {showGame: false, highlight: false, friends: false, suggest: false, checks: false, initialGroups: [], seed: '0_0'},
+        {showGame: true, highlight: false, friends: false, suggest: false, checks: false, initialGroups: [], seed: '0_0'},
+        {showGame: true, highlight: false, friends: false, suggest: false, checks: false, initialGroups: [], seed: '0_0'},
         {showGame: true, highlight: false, friends: false, suggest: false, checks: false, initialGroups: [], seed: '0_0'},
         {showGame: true, highlight: false, friends: false, suggest: false, checks: false, initialGroups: [], seed: '0_0'},
         {showGame: true, highlight: true, friends: true, suggest: false, checks: false, initialGroups: [['0_0', '2_1'], ['1_1', '3_0']], seed: '0_0'},
-        {showGame: true, highlight: true, friends: true, suggest: true, checks: false, initialGroups: [['0_0', '2_1'], ['1_0',  '0_2'], ['1_1', '2_0'], ['1_2', '2_2'], ['2_3', '3_0']], seed: '0_0'},
+        {showGame: true, highlight: true, friends: true, suggest: true, checks: true, initialGroups: [['0_0', '2_1'], ['1_0',  '0_2'], ['1_1', '2_0'], ['1_2', '2_2'], ['2_3', '3_0']], seed: '0_0'},
         {showGame: true, highlight: true, friends: true, suggest: true, checks: true, initialGroups: [['0_0', '2_1', '3_1'], ['1_0',  '0_2'], ['1_1', '2_0'], ['1_2', '2_2'], ['2_3', '3_0']], seed: '0_0'}
     ];
 
@@ -1439,7 +1440,7 @@ app.controller('tutorialCtrl', function($scope, Restangular, $state) {
 
     var userAc = false;
     $scope.tutState = -1;
-    $scope.next(-1);
+    $scope.next(0);
 
     function draw2(props, c) {
         var con = c.getContext('2d');
