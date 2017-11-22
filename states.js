@@ -35,8 +35,7 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     $stateProvider
         .state('tutorial', {
             url: '/tutorial',
-            templateUrl: 'tutorial.html',
-            controller: 'tutorialCtrl'
+            templateUrl: 'tutorial.html'
         });
 
     $stateProvider

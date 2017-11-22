@@ -1185,6 +1185,16 @@ app.controller('gameCtrl', function($scope, Restangular, $state) {
     var startTime = (new Date()).getTime();
     var initialScore = 0;
 
+    var tutorial = {numTutorials: 4, show: true, state: 0, attempts: 0, sucAttempts: 0, info: {
+        0: {numStates: 5, highlight: false, friends: false, checks: false, initialGroups: [], seed: ''},
+        1: {numStates: 1, highlight: true, friends: false, checks: false, initialGroups: [], seed: ''},
+        4: {numStates: 1, highlight: true, friends: true, checks: false, initialGroups: [], seed: ''},
+        7: {numStates: 1, highlight: true, friends: true, checks: true, initialGroups: [], seed: ''}
+    }};
+
+    var settings = {highlight: true, friends: true, checks: true, initialGroups: [], seed: ''};
+
+
     // load images of all 162 properties and add then
     // to variable images
     $scope.numLoaded = 0;
@@ -1196,6 +1206,8 @@ app.controller('gameCtrl', function($scope, Restangular, $state) {
         pos: null, // position of element after sorting based on similarity
         truepos: null // true position of the element, i.e. its index within the "models" array.
     };
+
+
 
     var traces = [];
 
@@ -1583,8 +1595,6 @@ app.controller('gameCtrl', function($scope, Restangular, $state) {
             if (smallestGroup.length == 0) {
                 seedType = 'ran';
 
-
-
                 $scope.seed.model = getRandomInt(0, $scope.modelNames.length);
                 $scope.seed.truepos = getRandomInt(0, models[$scope.seed.model].length - 1);
             } else {
@@ -1633,6 +1643,14 @@ app.controller('gameCtrl', function($scope, Restangular, $state) {
             prevSeeds = serverJson.prevSeeds.prevSeeds;
             // tut = serverJson.attempts;
             // tutSeed = serverJson.solution.seed;
+
+            tutorial.attempts = serverJson.attempts;
+            tutorial.sucAttempts = serverJson.sucAttempts;
+
+            if (tutorial.sucAttempts < tutorial.info.length) {
+                tutorial.show = true;
+                settings = tutorial.info[tutorial.sucAttempts];
+            }
 
             loadImages();
 
@@ -1756,9 +1774,25 @@ app.controller('gameCtrl', function($scope, Restangular, $state) {
         var ind = models[model][positions[model].pos].pos;
         positions[model].truepos = ind;
 
-        draw(props, true, document.getElementById('model_' + model), model);
-        drawContBar(model, document.getElementById('cont_bar_' + model));
-        drawFriendBar(model, document.getElementById('friend_bar_' + model));
+
+
+        if (settings.friends) {
+            draw(props, true, document.getElementById('model_' + model), model);
+        } else {
+            draw(props, false, document.getElementById('model_' + model), model);
+        }
+
+
+        if (settings.friends) {
+            drawFriendBar(model, document.getElementById('friend_bar_' + model));
+        }
+
+        if (settings.friends) {
+            drawContBar(model, document.getElementById('cont_bar_' + model));
+        }
+
+
+
         drawSuggestBar(model, document.getElementById('suggest_bar_' + model));
 
         // redraw all other elements, if element changed (i.e. if dir != '0')
@@ -2425,6 +2459,25 @@ app.controller('gameCtrl', function($scope, Restangular, $state) {
     }
 
     //// END PLAYER TRACES ////////
+
+
+    ///// TUTORIAL STUFF //////
+
+
+    $scope.next = function(state) {
+
+        if (state == '+') {
+            $scope.tutorial.state ++;
+        } else {
+            $scope.tutorial.state = state;
+        }
+
+        if ($scope.tutorial.state > $scope.tutorial.info[$scope.tutorial.sucAttempts].numStates) {
+            $scope.tutorial.show = false;
+        }
+
+
+    };
 
     $scope.Math = window.Math;
 

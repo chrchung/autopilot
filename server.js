@@ -88,6 +88,8 @@ app.get('/get_best_solution/:level', function (req, res) {
             //     });
             // } else {
 
+
+
                 var Solutions = Parse.Object.extend('Solutions');
                 var solutionsQuery = new Parse.Query(Solutions);
                 solutionsQuery.equalTo('fake', false);
@@ -117,7 +119,7 @@ app.get('/get_best_solution/:level', function (req, res) {
 
                         seedsQuery.first({
                             success: function (seed) {
-                                res.json({solution: sol, attempts: user.attributes.numSucAttempts, prevSeeds: seed});
+                                res.json({solution: sol, attempts: user.attributes.numAttempts, sucAttempts: user.attributes.numSucAttempts, prevSeeds: seed});
                             },
                             error: function (error) {
                                 res.status(400).end();
@@ -441,27 +443,7 @@ app.post('/save_attempt', function(req, res) {
 
     sol.save(null, {
         success: function (gameScore) {
-            var UserData = Parse.Object.extend('UserData');
-            var userDataQuery = new Parse.Query(UserData);
-            userDataQuery.equalTo('user', username);
-            userDataQuery.first({
-                success: function (user) {
-                    user.set('numAttempts', user.attributes.numAttempts + 1);
 
-                    user.save(null, {
-                        success: function (result) {
-                            res.status(200).end();
-                        },
-                        error: function (result, error) {
-                            res.status(400).end();
-                        }
-                    });
-
-                },
-                error: function (error) {
-                    res.status(400).end();
-                }
-            });
 
         },
         error: function (gameScore, error) {
