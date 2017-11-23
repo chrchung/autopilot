@@ -1223,6 +1223,8 @@ app.controller('gameCtrl', function($scope, Restangular, $state) {
     // store player traces
     var traces = [];
 
+    var selectedModel;
+
     ///// end of initialization code and variables /////////
 
 
@@ -1548,7 +1550,7 @@ app.controller('gameCtrl', function($scope, Restangular, $state) {
             format: 'hex'
         });
 
-       console.log(cols.join("','"));
+       //console.log(cols.join("','"));
 
         for (var i = 0; i < initialGroups.length; i ++) {
             var group = initialGroups[i];
@@ -1647,7 +1649,7 @@ app.controller('gameCtrl', function($scope, Restangular, $state) {
             tutorial.attempts = serverJson.attempts;
             tutorial.sucAttempts = serverJson.sucAttempts;
 
-            if (tutorial.sucAttempts < tutorial.info.length) {
+            if (tutorial.info[tutorial.sucAttempts]) {
                 tutorial.show = true;
                 settings = tutorial.info[tutorial.sucAttempts];
             }
@@ -1774,9 +1776,11 @@ app.controller('gameCtrl', function($scope, Restangular, $state) {
         var ind = models[model][positions[model].pos].pos;
         positions[model].truepos = ind;
 
+        if (settings.checks) {
+            document.getElementById('check').hide();
+        }
 
-
-        if (settings.friends) {
+        if (settings.highlight) {
             draw(props, true, document.getElementById('model_' + model), model);
         } else {
             draw(props, false, document.getElementById('model_' + model), model);
@@ -1784,11 +1788,17 @@ app.controller('gameCtrl', function($scope, Restangular, $state) {
 
 
         if (settings.friends) {
-            drawFriendBar(model, document.getElementById('friend_bar_' + model));
+            drawFriendBar(model, true, document.getElementById('friend_bar_' + model));
+        } else {
+            drawFriendBar(model, false, document.getElementById('friend_bar_' + model));
+
         }
 
         if (settings.friends) {
-            drawContBar(model, document.getElementById('cont_bar_' + model));
+            drawContBar(model, true, document.getElementById('cont_bar_' + model));
+        } else {
+            drawContBar(model, false, document.getElementById('cont_bar_' + model));
+
         }
 
 
@@ -1804,6 +1814,8 @@ app.controller('gameCtrl', function($scope, Restangular, $state) {
 
     // toggle the selection
     $scope.select = function (model) {
+
+        selectedModel = model;
 
         // can't deselect seed
         if ($scope.seed.model == model) {
@@ -1922,9 +1934,53 @@ app.controller('gameCtrl', function($scope, Restangular, $state) {
     }
 
     function updateScore() {
+        var pre = $scope.score;
         var curGroup = getCurGroupAsArray(positions);
 
         $scope.score = calculateOverallScore(curGroup, initialGroups) - initialScore + $scope.target - 1;
+
+       var scoreChange =  $scope.score - pre;
+
+        if (scoreChange > 0) {
+            var pos = $('#suggest_bar_' + selectedModel).position();
+
+            var feedback = $("<div></div>");
+            feedback.text(scoreChange);
+            feedback.css({'color': '#45b68a',
+                'font-size': '25px',
+                'font-family': 'lovelo',
+                'display': 'none',
+                'position': 'absolute',
+                'top': pos.top.toString() + 'px',
+                'left': '+' + (pos.left + Math.random() * 300).toString() + 'px'
+            });
+
+            $('body').append(feedback);
+            feedback.fadeIn().delay(50).fadeOut();
+            setTimeout(function(){ feedback.remove() }, 500);
+
+        } else if (scoreChange < 0) {
+            var pos = $('#suggest_bar_' + selectedModel).position();
+
+
+            var feedback = $("<div></div>");
+            feedback.text(scoreChange);
+            feedback.css({'color': '#fc3d5d',
+                'font-size': '25px',
+                'font-family': 'lovelo',
+                'display': 'none',
+                'position': 'absolute',
+                'top': pos.top.toString() + 'px',
+                'left': (pos.left  + Math.random() * 300).toString() + 'px'
+            });
+
+            $('body').append(feedback);
+            feedback.fadeIn().delay(50).fadeOut();
+            setTimeout(function(){ feedback.remove() }, 300);
+
+        }
+
+
 
         if ($scope.score >= $scope.target * $scope.leeway && $scope.target != 0) {
             endGame();
@@ -2160,7 +2216,7 @@ app.controller('gameCtrl', function($scope, Restangular, $state) {
     }
 
     // draw contribution bar
-    function drawContBar(model, c) {
+    function drawContBar(model, show, c) {
         var cont = getEleContribution(model + '_' + positions[model].truepos);
         var eles = document.getElementById('model_' + model);
 
@@ -2169,24 +2225,26 @@ app.controller('gameCtrl', function($scope, Restangular, $state) {
         c.width = 10 + eles.width;
         con.drawImage(eles, 10, 0);
 
-
-        if (positions[model].selected == -1) {
-            con.fillStyle = 'red';
-            con.fillRect(0, 0, 5, dim);
-            var fillWidth = 120 - Math.round(dim * cont); // +
-            con.fillStyle = '#cee1ff';
-            con.fillRect(0, 0, 5, fillWidth);
-        } else {
-            con.fillStyle = 'red';
-            con.fillRect(0, 0, 5, dim);
-            var fillWidth = 120 - Math.round(dim * cont);
-            con.fillStyle = '#cee1ff';
-            con.fillRect(0, 0, 5, fillWidth);
+        if (show) {
+            if (positions[model].selected == -1) {
+                con.fillStyle = 'red';
+                con.fillRect(0, 0, 5, dim);
+                var fillWidth = 120 - Math.round(dim * cont); // +
+                con.fillStyle = '#cee1ff';
+                con.fillRect(0, 0, 5, fillWidth);
+            } else {
+                con.fillStyle = 'red';
+                con.fillRect(0, 0, 5, dim);
+                var fillWidth = 120 - Math.round(dim * cont);
+                con.fillStyle = '#cee1ff';
+                con.fillRect(0, 0, 5, fillWidth);
+            }
         }
+
     }
 
 
-    function drawFriendBar(model, c) {
+    function drawFriendBar(model, show, c) {
         var eles = document.getElementById('cont_bar_' + model);
 
         var con = c.getContext('2d');
@@ -2194,7 +2252,7 @@ app.controller('gameCtrl', function($scope, Restangular, $state) {
         c.width = 30 + eles.width;
 
         con.drawImage(eles, 0, 0);
-        if ($scope.seed.model == model && $scope.seed.pos == positions[model].pos || models[model][positions[model].pos].color == null) {
+        if (show && $scope.seed.model == model && $scope.seed.pos == positions[model].pos || models[model][positions[model].pos].color == null) {
             con.fillStyle = "white";
         } else {
             con.fillStyle = models[model][positions[model].pos].color;
