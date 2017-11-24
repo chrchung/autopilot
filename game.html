@@ -196,19 +196,22 @@
 </div>
 
 
-
-
-
 <!--end == 2 || end == 3-->
-<div ng-show="tutorial.show" style="top:0;bottom:0;left:0;right:0;position:absolute;background-color:rgba(255,255,255,0.5)">
-    <div ng-show="tutorial.sucAttempts == 0">
+<div class="tutorial-container" ng-show="tutorial.show" style="">
+    <div class="tutorial-sub-container" ng-show="tutorial.sucAttempts == 0">
 
         <div ng-show="tutorial.state == 0">
+            <img style="width:10%;" src="assets/images/blah.png"/>
+            <br>
             Welcome to Beatlejuice, a planet inhabited by Blobs, an amiable and harmless alien species.
             Let's get you acquainted with them...
-
-            <img style="height:10vh" src="assets/images/blah.png"/>
-
+            <br>
+            <div class="text-center ui buttons">
+                <button ng-click="next(0)" class="ui black icon button"><i class="left chevron icon"></i>
+                </button>
+                <button ng-click="next(2)" class="ui black icon button"><i class="right chevron icon"></i>
+                </button>
+            </div>
         </div>
 
         <div ng-show="tutorial.state == 1">
@@ -228,9 +231,9 @@
 
             <br>
             <div class="text-center ui buttons">
-                <button ng-click="next(0)" class="big-button ui black icon button"><i class="left chevron icon"></i>
+                <button ng-click="next(0)" class="ui black icon button"><i class="left chevron icon"></i>
                 </button>
-                <button ng-click="next(2)" class="big-button ui black icon button"><i class="right chevron icon"></i>
+                <button ng-click="next(2)" class="ui black icon button"><i class="right chevron icon"></i>
                 </button>
             </div>
         </div>
@@ -250,9 +253,9 @@
             <br>
 
             <div class="text-center ui buttons">
-                <button ng-click="next(1)" class="big-button ui black icon button"><i class="left chevron icon"></i>
+                <button ng-click="next(1)" class="ui black icon button"><i class="left chevron icon"></i>
                 </button>
-                <button ng-click="next(3)" class="big-button ui black icon button"><i class="right chevron icon"></i>
+                <button ng-click="next(3)" class="ui black icon button"><i class="right chevron icon"></i>
                 </button>
             </div>
 
@@ -278,9 +281,9 @@
             <br>
 
             <div class="text-center ui buttons">
-                <button ng-click="next(2)" class="big-button ui black icon button"><i class="left chevron icon"></i>
+                <button ng-click="next(2)" class="ui black icon button"><i class="left chevron icon"></i>
                 </button>
-                <button ng-click="next(4)" class="big-button ui black icon button"><i class="right chevron icon"></i>
+                <button ng-click="next(4)" class="ui black icon button"><i class="right chevron icon"></i>
                 </button>
             </div>
         </div>
@@ -292,16 +295,16 @@
             </div>
 
             <div class="text-center ui buttons">
-                <button ng-click="next(3)" class="big-button ui black icon button"><i class="left chevron icon"></i>
+                <button ng-click="next(3)" class="ui black icon button"><i class="left chevron icon"></i>
                 </button>
-                <button ng-click="next(5)" class="big-button ui black icon button"><i class="right chevron icon"></i>
+                <button ng-click="next(5)" class="ui black icon button"><i class="right chevron icon"></i>
                 </button>
             </div>
         </div>
     </div>
 
 
-    <div ng-show="tutorial.sucAttempts == 1">
+    <div class="tutorial-sub-container" ng-show="tutorial.sucAttempts == 1">
 
         <div ng-show="tutorial.state == 0" class="tut-text">
             <div>
@@ -313,13 +316,13 @@
 
 
             <div class="text-center ui buttons">
-                <button ng-click="next(1)" class="big-button ui black icon button"><i class="right chevron icon"></i>
+                <button ng-click="next(1)" class="ui black icon button"><i class="right chevron icon"></i>
                 </button>
             </div>
         </div>
     </div>
 
-    <div ng-show="tutorial.sucAttempts == 4">
+    <div class="tutorial-sub-container" ng-show="tutorial.sucAttempts == 4">
 
         <div ng-show="tutorial.state == 0" class="tut-text">
             <div>
@@ -344,14 +347,14 @@
 
 
             <div class="text-center ui buttons">
-                <button ng-click="next(1)" class="big-button ui black icon button"><i class="right chevron icon"></i>
+                <button ng-click="next(1)" class="ui black icon button"><i class="right chevron icon"></i>
                 </button>
             </div>
         </div>
     </div>
 
 
-    <div ng-show="tutorial.sucAttempts == 7">
+    <div class="tutorial-sub-container" ng-show="tutorial.sucAttempts == 7">
 
         <div ng-show="tutorial.state == 0" class="tut-text">
             <div>
@@ -362,7 +365,7 @@
 
 
             <div class="text-center ui buttons">
-                <button ng-click="next(1)" class="big-button ui black icon button"><i class="right chevron icon"></i>
+                <button ng-click="next(1)" class="ui black icon button"><i class="right chevron icon"></i>
                 </button>
             </div>
         </div>

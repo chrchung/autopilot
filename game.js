@@ -1185,7 +1185,7 @@ app.controller('gameCtrl', function($scope, Restangular, $state) {
     var startTime = (new Date()).getTime();
     var initialScore = 0;
 
-    var tutorial = {numTutorials: 4, show: true, state: 0, attempts: 0, sucAttempts: 0, info: {
+    $scope.tutorial = {numTutorials: 4, show: true, state: 0, attempts: 0, sucAttempts: 0, info: {
         0: {numStates: 5, highlight: false, friends: false, checks: false, initialGroups: [], seed: '0_1'},
         1: {numStates: 1, highlight: true, friends: false, checks: false, initialGroups: [], seed: '1_1'},
         4: {numStates: 1, highlight: true, friends: true, checks: false, initialGroups: [["0_10","1_12","2_16","4_8","6_17","7_12"],["1_23","2_32","3_19","4_18","5_14","6_31","7_23","0_22"],["0_24","2_34","3_22","4_21","5_16","6_33","7_25"],["0_7","1_5","2_9","4_4","6_8"],["0_11","1_13","2_17","3_9","4_9","5_7","6_18"],["1_8","6_12","2_12","3_6","7_8"],["0_19","1_20","2_28","3_16","4_15","6_27","7_20"],["6_19","2_18","1_14","3_10"],["2_3","4_1","5_1","6_3","7_3"],["0_9","4_7","5_4","6_16","7_11"],["1_7","2_11","3_5","6_11"],["0_23","1_24","2_33","3_20","4_19","5_15","6_32","7_24"],["0_13","1_16","3_11","4_11","6_21","7_15"],["0_16","1_19","2_26","3_15","4_2","6_25","7_19","5_13"],["0_15","5_12"],["0_20","1_3","2_29","6_28","7_21"],["3_13","7_13","6_23"],["1_18","2_25","3_14","6_24","7_18"],["0_25","2_22","3_12","6_22","7_16"],["0_5","6_6","7_5"],["1_28","2_37","3_24","6_35"],["1_2","6_2"],["2_27","0_18","6_26"],["1_21","2_30","6_29"],["2_10","6_9","1_6"],["2_19","6_20","1_25"],["1_11","3_7"],["2_15","3_3","6_7","7_6","0_6"],["6_14","7_9"],["2_13","6_13"],["0_3","4_3","2_8"],["2_6","6_5","0_4","7_4"],["1_4","5_2"],["2_35","6_15","7_10"],["7_2","2_2"],["4_5","5_11"],["4_16","3_17"],["2_20","1_26"],["2_7","7_7"],["4_10","7_14"],["2_14","1_10"],["5_6","3_8"],["2_1","6_1","0_1","1_1","7_1"],["5_10","3_21"],["5_9","1_15","0_17"],["1_9","5_0"],["6_4","3_0","2_4"],["4_6","0_12","5_3"],["4_20","0_8","6_10","5_8","2_5","3_4"],["3_2","0_2","5_5"],["0_0","1_0","2_0","3_1","4_0","6_0","7_0"],["1_17","2_24","4_13","7_17"],["0_14","1_27","2_36","3_23","5_17","6_34","7_26"]], seed: '0_21'},
@@ -1509,13 +1509,13 @@ app.controller('gameCtrl', function($scope, Restangular, $state) {
 
     function start() {
 
-        if (tutorial.info[tutorial.sucAttempts]) {
+        if ($scope.tutorial.info[$scope.tutorial.sucAttempts]) {
             level = 1;
-            tutorial.show = true;
+            $scope.tutorial.show = true;
             positions = hospitalPos;
             $scope.modelNames = [0, 1, 2, 3, 4, 5, 6, 7];
 
-            settings = tutorial.info[tutorial.sucAttempts];
+            settings = $scope.tutorial.info[$scope.tutorial.sucAttempts];
             initialGroups = settings.initialGroups;
             models = hospital;
 
@@ -1535,7 +1535,7 @@ app.controller('gameCtrl', function($scope, Restangular, $state) {
         initialScore = calculateOverallScore([], initialGroups);
 
         // get a seed
-        if (tutorial.info[tutorial.sucAttempts]) {
+        if ($scope.tutorial.info[$scope.tutorial.sucAttempts]) {
             var ele = settings.seed.split('_');
             $scope.seed.model = parseInt(ele[0]);
             $scope.seed.truepos = parseInt(ele[1]);
@@ -1687,8 +1687,8 @@ app.controller('gameCtrl', function($scope, Restangular, $state) {
             // tut = serverJson.attempts;
             // tutSeed = serverJson.solution.seed;
 
-            tutorial.attempts = serverJson.attempts;
-            tutorial.sucAttempts = serverJson.sucAttempts;
+            $scope.tutorial.attempts = serverJson.attempts;
+            $scope.tutorial.sucAttempts = serverJson.sucAttempts;
 
 
 
