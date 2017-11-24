@@ -10,7 +10,32 @@
     all games will be multiplied by 10!
 </div>
 
-<div id="ele-panel" style="margin-left:7px;margin-right:7px;margin-top:7px">
+<div id="game-panel" style="" class="">
+    <div style="">
+        <div id="happiness" style="">
+            <div>Happiness: {{ score }}/{{ target * leeway }}</div>
+        </div>
+    </div>
+    <div style="" class="">
+        <div id="sugg">
+            <!--<div style="" class="med-button ui buttons">-->
+            <!--<button ng-click="getSuggestion('-')" class="ui black icon button" style=""><i class="pointing left icon"></i></button>-->
+            <!--<button style="min-width:95px;border-width:1px;border-style:solid;background-color:white;cursor:default;color:black;" class="ui button"><span ng-show="suggestions.suggestionList.length == 0">None</span><span ng-show=suggestions.suggestionList.length != 0">{{(suggestions.counter + 1|| 0)}} / {{suggestions.suggestionList.length}}</span></button>-->
+            <!--<button ng-click="getSuggestion('+')" class=" ui black icon button" style=""><i class="pointing right icon"></i></button>-->
+            <!--</div>-->
+            <!--<br>-->
+            <div style="" class="med-button ui buttons">
+                <button ng-click="getNextAll('-')" class="ui black icon button" style=""><i class="pointing left icon"></i></button>
+                <button style="min-width:95px;border-width:1px;border-style:solid;background-color:white;cursor:default;color:black;" class="ui button"><span ng-show="scroll.max == -1">0/0</span><span ng-show="scroll.max != -1">{{scroll.counter + 1}} / {{models[scroll.max].length}}</span></button>
+                <button ng-click="getNextAll('+')" class="ui black icon button" style=""><i class="pointing right icon"></i></button>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<div id="ele-panel" style="">
     <table class="eles" style="" class="nostyle">
         <tr style="" ng-repeat="model in modelNames">
             <td style="margin-right: 5px;margin-top:5px;" class="scrolls ui buttons">
@@ -76,6 +101,7 @@
     </div>
 
 </div>
+
 
 <!--end == 2 || end == 3-->
 <div ng-show="end == 2 || end == 3" style="top:0;bottom:0;left:0;right:0;position:absolute;background-color:rgba(255,255,255,0.5)">
@@ -170,31 +196,7 @@
 </div>
 
 
-<div id="game-panel" style="" class="">
-    <div style="float:right;">
-        <div id="happiness" style="">
-            <div>Happiness:</div>
-            <div>{{ score }}/{{ target * leeway }}</div>
-        </div>
-    </div>
-    <div style="" class="">
-        <div id="sugg">
-            <!--<div style="" class="med-button ui buttons">-->
-                <!--<button ng-click="getSuggestion('-')" class="ui black icon button" style=""><i class="pointing left icon"></i></button>-->
-                <!--<button style="min-width:95px;border-width:1px;border-style:solid;background-color:white;cursor:default;color:black;" class="ui button"><span ng-show="suggestions.suggestionList.length == 0">None</span><span ng-show=suggestions.suggestionList.length != 0">{{(suggestions.counter + 1|| 0)}} / {{suggestions.suggestionList.length}}</span></button>-->
-                <!--<button ng-click="getSuggestion('+')" class=" ui black icon button" style=""><i class="pointing right icon"></i></button>-->
-            <!--</div>-->
-            <!--<br>-->
-            <div style="" class="med-button ui buttons">
-                <button ng-click="getNextAll('-')" class="ui black icon button" style=""><i class="pointing left icon"></i></button>
-                <button style="min-width:95px;border-width:1px;border-style:solid;background-color:white;cursor:default;color:black;" class="ui button"><span ng-show="scroll.max == -1">0/0</span><span ng-show="scroll.max != -1">{{scroll.counter + 1}} / {{models[scroll.max].length}}</span></button>
-                <button ng-click="getNextAll('+')" class="ui black icon button" style=""><i class="pointing right icon"></i></button>
-            </div>
 
-        </div>
-    </div>
-
-</div>
 
 
 <!--end == 2 || end == 3-->
