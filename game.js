@@ -2572,7 +2572,7 @@ app.controller('gameCtrl', function($scope, Restangular, $state) {
             $scope.tutorial.state = state;
         }
 
-        if ($scope.tutorial.state > $scope.tutorial.info[$scope.tutorial.sucAttempts].numStates) {
+        if ($scope.tutorial.state >= $scope.tutorial.info[$scope.tutorial.sucAttempts].numStates) {
             $scope.tutorial.show = false;
         }
 
