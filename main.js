@@ -2,7 +2,7 @@
  * Created by Christina on 2016-12-08.
  */
 
-var app = angular.module('myApp', ['ui.router', 'ngDragDrop']);
+var app = angular.module('myApp', ['ui.router']);
 
 app.directive('draggable', ['$document', function ($document) {
     return {
@@ -40,7 +40,7 @@ app.directive('draggable', ['$document', function ($document) {
 }]);
 
 
-app.controller('mainCtrl', function ($scope, Restangular, $state) {
+app.controller('mainCtrl', function ($scope, $state) {
 
     var times = [];
 
