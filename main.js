@@ -2,7 +2,7 @@
  * Created by Christina on 2016-12-08.
  */
 
-var app = angular.module('myApp', ['restangular', 'ui.router', 'ngDragDrop']);
+var app = angular.module('myApp', ['ui.router', 'ngDragDrop']);
 
 app.directive('draggable', ['$document', function ($document) {
     return {
