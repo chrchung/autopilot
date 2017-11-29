@@ -1,17 +1,223 @@
 <!--<a style="margin:5px;float:right;color:black" ui-sref="scoreboard" class="big-a">Hall of Fame <i class="pointing right icon"></i></a>-->
 
-<header class="background2 text-center" id="main">
-    <!--<div class="text-center" id="main-container">-->
+<header class="background2 text-center shadow" id="main">
 
-    <h1 style="font-family:lovelo"><b>MATCHMAKERS II</b></h1>
+    <div id="toolbar">
 
-        <button ui-sref="auth" class="big-button ui black button">
-            Login
-        </button>
+        <span style="color:#00e3ff" ng-click="record($event)" id="autopilot"><i ng-show="autopilot['mode'] == 'run'" class="repeat icon"></i> <i ng-show="autopilot['mode'] != 'run'" class="font icon"></i></span>
 
-        <button ui-sref="signup" class="big-button ui black button">
-            Continue as guest
-        </button>
-    <!--</div>-->
+        <span ng-click="record($event)" id="batter"><i class="plug icon"></i></span>
 
+        <span ng-click="record($event)" id="wifi"><i class="wifi icon"></i></span>
+
+        <span ng-click="record($event)" id="volume"><i class="volume down icon"></i></span>
+
+        <span ng-click="record($event)" id="time">Tue 9:13 PM</span>
+
+        <span ng-click="record($event)" id="search"><i class="search icon"></i></span>
+
+        <span ng-click="record($event)" id="settings"><i class="list icon"></i></span>
+
+    </div>
+
+    <div ng-show="show['powerpoint-app']" id="powerpoint-app" class="draggable window shadow">
+        <div class="top">
+            <div ng-click="record($event)" id="close-powerpoint" class="close"></div>
+            <div class="title"><div>Powerpoint</div></div>
+        </div>
+
+        <div class="bottom" style="overflow-y: auto;">
+            <div style="display:flex">
+                <div>
+                    <i ng-click="record($event)" id="add-slide" style="position:fixed; cursor:pointer;color:#1fd449;font-size:50px;line-height:50px" class="add square icon"></i>
+                </div>
+                <div class="col-container">
+                    <div class="shadow" style="padding: 20px;border: solid 0.1px #e4e4e4;box-shadow: aliceblue;margin: 10px 0 10px 0;width: 300px;" ng-repeat="im in powerpoint['slides'] track by $index">
+                        <img id="" class="ui image" ng-src="{{im.path}}"/>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div ng-show="show['autopilot-app']" id="autopilot-app" class="shadow">
+        <div class="row-container" style="display:flex;align-content:centre;justify-content:flex-start">
+            <!--<div id="repeat" ng-click="record($event)" style="cursor:pointer;">Edit</div>&ndash;&gt;-->
+            Threshold: <input style="width:30px;margin-right:50px;" id="repeat" ng-model="autopilot['repthres']" type="number"/>
+
+            <div><i ng-click="record($event)" id="recorder" style="font-size: 30px;line-height: 30px;cursor:pointer;" class="record icon"></i></div>
+        </div>
+
+
+        <div id="macro-container" ng-show="autopilot['mode'] == 'def'" style="display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;height: 200px;
+    overflow-y: auto;">
+            <div class="item" ng-repeat="macro in autopilot.macros track by $index">
+                <!--<span ng-show="autopilot['mode'] == 'edit'" style="cursor:pointer;color:#ff4e4e;" ng-click="removeMacro(macro.ind)" id="delete-step"><i class="minus square icon"></i>&ndash;&gt;-->
+                </span>
+                <span style="cursor:pointer" ng-click="record($event)" id="viewmacro_{{macro.name}}">
+                    {{macro.name}}
+                </span>
+            </div>
+
+        </div>
+
+        <div id="macro-view" ng-show="autopilot['mode'] == 'mac'" style="display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;height: 200px;
+    overflow-y: auto;">
+
+            <div class="item">
+                {{autopilot['selected']['name']}}
+            </div>
+
+            <div class="item" ng-repeat="step in autopilot['selected']['steps']">
+                <!--<span style="cursor:pointer;color:#ff4e4e;" ng-click="" id="delete-step"><i class="minus square icon"></i>-->
+                <!--</span>-->
+                <span>
+                    {{step.text}}
+                </span>
+                <span>
+                    <img style="max-width:30px" ng-src="{{step.img}}"/>
+                </span>
+            </div>
+        </div>
+
+
+        <div id="suggest-no-loop-container" ng-show="autopilot['mode'] == 'sug_noloop' || autopilot['mode'] == 'sug_loop'" style="display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;height: 200px;
+    overflow-y: auto;">
+
+
+            <div class="item">
+                <span ng-show="autopilot['mode'] == 'sug_noloop'">
+                    Would you like to run {{autopilot['suggest']['name']}}? The following steps will
+                    execute:
+                </span>
+                <span ng-show="autopilot['mode'] == 'sug_loop'">
+                    Would you like to run {{autopilot['suggest']['name']}} on the selected
+                    <strong>{{powerpoint['selected'].length}}</strong> images?<br>
+                    (Deselect any images you do not want to include in the execution).<br>
+                    The following steps will execute:
+                </span>
+
+            </div>
+
+            <div class="item" ng-repeat="step in autopilot['suggest']['steps']">
+                <!--<span style="cursor:pointer;color:#ff4e4e;" ng-click="" id="delete-step"><i class="minus square icon"></i>-->
+                <!--</span>-->
+                <span>
+                    {{step.text}}
+                </span>
+                <span>
+                    <img style="max-width:30px" ng-src="{{step.img}}"/>
+                </span>
+            </div>
+        </div>
+
+
+        <div id="step-container" ng-show="autopilot['mode'] == 'record'" style="display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;height: 200px;
+    overflow-y: auto;">
+            <div class="item" ng-repeat="step in autopilot.steps track by $index">
+                <span style="cursor:pointer;color:#ff4e4e;" ng-click="removeStep(step.ind)" id="delete-step"><i class="minus square icon"></i>
+                </span>
+                <span>
+                    {{step.text}}
+                </span>
+                <span>
+                    <img style="max-width:30px" ng-src="{{step.img}}"/>
+                </span>
+            </div>
+
+        </div>
+        <div ng-show="autopilot['mode'] == 'record'" style="display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-content: flex-end;
+    margin-top: 5px;">
+
+            <div class="ui green button tiny" id="save-record" ng-click="record($event)">Save</div>
+            <div class="ui red button tiny" id="cancel-record" ng-click="record($event)">Cancel</div>
+        </div>
+
+
+        <div ng-show="autopilot['mode'] == 'sug_loop' || autopilot['mode'] == 'sug_noloop'" style="display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-content: flex-end;
+    margin-top: 5px;">
+
+            <div class="ui green button tiny" id="yes-mac" ng-click="record($event)">Yes</div>
+            <div class="ui red button tiny" id="no-mac" ng-click="record($event)">No</div>
+        </div>
+
+
+        <div ng-show="autopilot['mode'] == 'mac'" style="display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-content: flex-end;
+    margin-top: 5px;">
+
+            <div class="" id="back" style="cursor:pointer;font-size:25px;line-height:25px" ng-click="record($event)"><i class="long arrow left icon"></i></div>
+        </div>
+
+    </div>
+
+
+    <div ng-show="show['add-slide-app']" id="add-slide-app" class="draggable window shadow">
+        <div class="top">
+            <div style="cursor:pointer;color:#ff4e4e;" ng-click="record($event)" id="cancel-image"><i class="minus square icon"></i>
+            </div>
+            <div style="cursor:pointer;color:#1fd449"  ng-click="record($event)" id="open-image"><i class="add square icon"></i>
+            </div>
+        </div>
+
+        <div class="bottom">
+            <div class="row-container">
+                <div ng-repeat="im in images">
+                    <img id="{{im.name}}" style="cursor:pointer" ng-click="record($event)" class="ui image" ng-src="{{im.path}}"/>
+                    <label style="font-weight:normal">{{im.name}}</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div ng-show="show['documents-app']" id="documents-app" class="draggable window shadow">
+        <div class="top">
+            <div ng-click="record($event)" id="close-documents" class="close"></div>
+            <div class="title"><div>Documents</div></div>
+        </div>
+
+        <div class="bottom">
+            <div class="row-container">
+                <div ng-click="" id="{{im.path}}" style="cursor:pointer" ng-repeat="im in images">
+                    <img class="ui image" ng-src="{{im.path}}"/>
+                    <label style="font-weight:normal">{{im.name}}</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+        <div class="shadow" id="nav">
+            <span ng-click="record($event)" id="powerpoint">
+                <i class="file powerpoint outline icon"></i>
+            </span>
+
+            <span ng-click="record($event)" id="documents">
+                <i class="folder icon"></i>
+            </span>
+        </div>
 </header>
