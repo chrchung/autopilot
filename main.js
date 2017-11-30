@@ -113,8 +113,8 @@ app.controller('mainCtrl', function ($scope, $state) {
 
         } else {
             if (remove && powerpoint['selected'].length > 0) {
-                $('#' + powerpoint['selected'][id - 1]['name']).toggleClass(col);
-                powerpoint['selected'][id - 1] = img;
+                $('#' + powerpoint['selected'][0]['name']).toggleClass(col);
+                powerpoint['selected'][0] = img;
                 $('#' + img['name']).toggleClass(col);
 
             } else {
