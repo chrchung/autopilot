@@ -161,7 +161,6 @@ app.controller('mainCtrl', function ($scope, $state) {
             step['ind'] = 0;
         }
 
-        traces.push(step);
 
         checkRepetitions();
 
@@ -190,6 +189,10 @@ app.controller('mainCtrl', function ($scope, $state) {
 
         }
 
+        if (autopilot.mode != 'record') {
+            traces.push(step);
+        }
+
 
         // record elapsed time
         var temp = {'id': event.currentTarget.id, 'start': start, 'end': (new Date()).getTime()};
@@ -200,13 +203,21 @@ app.controller('mainCtrl', function ($scope, $state) {
         var looping = false;
         for (var i = 0; i < l.length; i++) {
             if (l[i]['text'].includes('Click image')) {
-                // l[i]['text'] = l[i]['text'].substring(0, l[i]['text'].length - 2);
+                l[i]['text'] = l[i]['text'].substring(0, l[i]['text'].length - 2);
                 looping = true;
                 l[i]['img'] = 'https://cdn4.iconfinder.com/data/icons/flatified/512/photos.png';
             }
         }
 
         return {'looping': looping, 'list': l};
+    };
+
+    $scope.delete = function () {
+        var macObj = getMacWithName(autopilot['selected']['name']);
+
+        autopilot['macros'].splice(macObj, 1);
+
+        executeAction('back', false);
     };
 
     $scope.saveRecording = function () {
@@ -250,6 +261,14 @@ app.controller('mainCtrl', function ($scope, $state) {
         }
     };
 
+    $scope.removeStepInEdit = function (index) {
+        for (var i = 0; i < autopilot['selected']['steps'].length; i++) {
+            if (autopilot['selected']['steps'][i]['ind'] == index) {
+                autopilot['selected']['steps'].splice(i, 1);
+                break;
+            }
+        }
+    };
 
     var addStep = function (event) {
         var res = {id: '', text: '', ind: 0, img: null};

@@ -72,14 +72,16 @@
     justify-content: flex-start;
     align-items: flex-start;height: 200px;
     overflow-y: auto;">
-
             <div class="item">
-                {{autopilot['selected']['name']}}
+                <span style="cursor:pointer;color:#ff4e4e;" ng-click="delete()" id="delete-macro"><i class="minus square icon"></i></span>
+                <input type="text" ng-model="autopilot['selected']['name']" class="item" style="width:92%;">
+                </input>
             </div>
 
+
             <div class="item" ng-repeat="step in autopilot['selected']['steps']">
-                <!--<span style="cursor:pointer;color:#ff4e4e;" ng-click="" id="delete-step"><i class="minus square icon"></i>-->
-                <!--</span>-->
+                <span style="cursor:pointer;color:#ff4e4e;" ng-click="removeStepInEdit(step.ind)" id="delete-step2"><i class="minus square icon"></i>
+                </span>
                 <span>
                     {{step.text}}
                 </span>
