@@ -95,7 +95,11 @@ app.controller('mainCtrl', function ($scope, $state) {
 
 
     $scope.toggleWindow = function (str) {
-        $scope.show[str] = !$scope.show[str];
+
+        setTimeout(function () {
+            $scope.show[str] = !$scope.show[str];
+        }, 1000);
+
     };
 
     $scope.selectImage = function (id, remove, col) {
