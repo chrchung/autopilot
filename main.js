@@ -226,7 +226,7 @@ app.controller('mainCtrl', function ($scope, $state) {
 
 
         var res = {
-            'name': 'New_Macro_' + autopilot['macros'].length,
+            'name': 'New_Macro_' + (new Date()).getTime(),
             'steps': steps['list'],
             'looping': steps['looping']
         };
