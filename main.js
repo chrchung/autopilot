@@ -379,6 +379,15 @@ app.controller('mainCtrl', function ($scope, $state) {
         }
     };
 
+
+    $scope.play = function (mac) {
+        autopilot['suggest'] = mac;
+        autopilot['macro_reps'][mac['name']] = 0;
+        traces = [];
+
+        $scope.toggleAutomationPrompt(mac['name']);
+    };
+
     $scope.runMac = function () {
         autopilot['mode'] = 'run';
 
@@ -547,7 +556,7 @@ app.controller('mainCtrl', function ($scope, $state) {
 
         powerpoint['selected'] = [];
 
-        executeAction('cancel-image', false);
+        $scope.show['add-slides-app'] = false;
 
     };
 

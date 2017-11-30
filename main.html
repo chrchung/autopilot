@@ -59,10 +59,15 @@
     overflow-y: auto;">
             <div class="item" ng-repeat="macro in autopilot.macros track by $index">
                 <!--<span ng-show="autopilot['mode'] == 'edit'" style="cursor:pointer;color:#ff4e4e;" ng-click="removeMacro(macro.ind)" id="delete-step"><i class="minus square icon"></i>&ndash;&gt;-->
-                </span>
+                <!--</span>-->
                 <span style="cursor:pointer" ng-click="record($event)" id="viewmacro_{{macro.name}}">
                     {{macro.name}}
                 </span>
+
+                <span>
+                    <i style="float:right;font-size:25px;line-height:25px;cursor:pointer" ng-click="play(macro)" class="video play icon"></i>
+                </span>
+
             </div>
 
         </div>
