@@ -556,7 +556,7 @@ app.controller('mainCtrl', function ($scope, $state) {
 
         powerpoint['selected'] = [];
 
-        $scope.show['add-slides-app'] = false;
+        $scope.show['add-slide-app'] = false;
 
     };
 
