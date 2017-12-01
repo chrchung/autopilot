@@ -97,6 +97,11 @@ app.controller('mainCtrl', function ($scope, $state) {
          $scope.show[str] = !$scope.show[str];
     };
 
+    $scope.rename = function(val) {
+        autopilot['macro_reps'][autopilot['selected']['name']] = autopilot['macro_reps'][val];
+
+    };
+
     $scope.selectImage = function (id, remove, col) {
 
         img = {'path': 'assets/images/anime_girls/' + id + '.jpg', 'name': id};
