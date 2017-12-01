@@ -570,6 +570,8 @@ app.controller('mainCtrl', function ($scope, $state) {
     };
 
     $scope.updateImages = function () {
+        $scope.images = [];
+
         populate($scope.images, files['images']['animegirls']);
     };
 
