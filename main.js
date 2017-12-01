@@ -40,7 +40,7 @@ app.directive('draggable', ['$document', function ($document) {
 }]);
 
 
-app.controller('mainCtrl', function ($scope, $state) {
+app.controller('mainCtrl', function ($scope, $state, $http) {
     var start2 = 1;
 
     $scope.cond = 3;
@@ -385,7 +385,7 @@ app.controller('mainCtrl', function ($scope, $state) {
 
 
     $scope.play = function (mac) {
-        start2 = 0;
+        start2 = 1;
         autopilot['suggest'] = mac;
         autopilot['macro_reps'][mac['name']] = 0;
         traces = [];
@@ -430,6 +430,10 @@ app.controller('mainCtrl', function ($scope, $state) {
         //     }
 
         start2 = 1;
+
+        //save
+        $http.post("/save", {text: times });
+        times = [];
     };
 
     $scope.toggleEdit = function () {
