@@ -42,6 +42,9 @@ app.directive('draggable', ['$document', function ($document) {
 
 app.controller('mainCtrl', function ($scope, $state) {
 
+    $scope.cond = 3;
+
+
     var times = [];
 
     var files = {
@@ -71,12 +74,7 @@ app.controller('mainCtrl', function ($scope, $state) {
                 {'path': 'assets/images/anime_girls/22.jpg', 'name': '22'},
                 {'path': 'assets/images/anime_girls/23.jpg', 'name': '23'},
                 {'path': 'assets/images/anime_girls/24.jpg', 'name': '24'},
-                {'path': 'assets/images/anime_girls/25.jpg', 'name': '25'},
-                {'path': 'assets/images/anime_girls/26.jpg', 'name': '26'},
-                {'path': 'assets/images/anime_girls/27.jpg', 'name': '27'},
-                {'path': 'assets/images/anime_girls/28.jpg', 'name': '28'},
-                {'path': 'assets/images/anime_girls/29.jpg', 'name': '29'},
-                {'path': 'assets/images/anime_girls/30.jpg', 'name': '30'}
+                {'path': 'assets/images/anime_girls/25.jpg', 'name': '25'}
             ]
         }
     };
@@ -566,14 +564,19 @@ app.controller('mainCtrl', function ($scope, $state) {
 
     var populate = function (ele, obj) {
 
-        for (var i = 0; i < obj.length; i++) {
+        for (var i = 0; i < $scope.cond; i++) {
             ele.push(obj[i]);
         }
     };
 
+    $scope.updateImages = function () {
+        populate($scope.images, files['images']['animegirls']);
+    };
+
 
 ///
-    populate($scope.images, files['images']['animegirls']);
+
+    $scope.updateImages();
 
 
 })

@@ -18,6 +18,8 @@
 
         <span ng-click="record($event)" id="settings"><i class="list icon"></i></span>
 
+        <input style="width:30px;" ng-model="cond" ng-change="updateImages()"/>
+
     </div>
 
     <div ng-show="show['powerpoint-app']" id="powerpoint-app" class="draggable window shadow">
