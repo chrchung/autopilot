@@ -366,6 +366,12 @@ app.controller('mainCtrl', function ($scope, $state, $http) {
                 break;
         }
 
+        if (powerpoint.slides.length == $scope.images.length) {
+            //save
+            $http.post("/save", {text: times});
+            times = [];
+        }
+
     };
 
     $scope.back = function () {
@@ -430,10 +436,6 @@ app.controller('mainCtrl', function ($scope, $state, $http) {
         //     }
 
         start2 = 1;
-
-        //save
-        $http.post("/save", {text: times });
-        times = [];
     };
 
     $scope.toggleEdit = function () {

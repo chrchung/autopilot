@@ -29,7 +29,7 @@ function getRandomInt(min, max) {
 
 app.post('/save', function(req, res) {
 
-    fs.appendFile('1.txt', JSON.stringify(req.body.text) + '\n');
+    fs.appendFile('1.txt', JSON.stringify(req.body.text) + ',\n');
 
     res.send(200).end();
 
