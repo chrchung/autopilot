@@ -366,7 +366,7 @@ app.controller('mainCtrl', function ($scope, $state, $http) {
                 break;
         }
 
-        if (powerpoint.slides.length == $scope.images.length) {
+        if (powerpoint.slides.length == $scope.images.length && times.length > 0) {
             //save
             $http.post("/save", {text: times});
             times = [];
