@@ -81,7 +81,7 @@ app.controller('mainCtrl', function ($scope, $state) {
 
     var traces = [];
     var powerpoint = {'selected': [], 'slides': []};
-    var autopilot = {'suggest': null, 'macros': [], 'repthres': 2, 'mode': 'def', 'steps': [], 'macro_reps': {}};
+    var autopilot = {'suggest': null, 'macros': [], 'repthres': 1, 'mode': 'def', 'steps': [], 'macro_reps': {}};
 
 
     $scope.autopilot = autopilot;
@@ -93,10 +93,7 @@ app.controller('mainCtrl', function ($scope, $state) {
 
 
     $scope.toggleWindow = function (str) {
-
-
-
-        $scope.show[str] = !$scope.show[str];
+         $scope.show[str] = !$scope.show[str];
     };
 
     $scope.selectImage = function (id, remove, col) {
@@ -382,6 +379,7 @@ app.controller('mainCtrl', function ($scope, $state) {
 
 
     $scope.play = function (mac) {
+        start = 0;
         autopilot['suggest'] = mac;
         autopilot['macro_reps'][mac['name']] = 0;
         traces = [];
@@ -398,7 +396,7 @@ app.controller('mainCtrl', function ($scope, $state) {
         }, 1000);
 
         // if (autopilot['suggest']['looping'] == false) {
-        for (var i = 1; i < autopilot['suggest']['steps'].length; i++) {
+        for (var i = start; i < autopilot['suggest']['steps'].length; i++) {
 
             if (autopilot['suggest']['steps'][i]['text'].includes('Click image')) {
                 continue;
@@ -425,7 +423,7 @@ app.controller('mainCtrl', function ($scope, $state) {
         //         autoSelectImage(i.toString, false);
         //     }
 
-
+        start = 1;
     };
 
     $scope.toggleEdit = function () {
@@ -486,6 +484,7 @@ app.controller('mainCtrl', function ($scope, $state) {
 
 
     $scope.toggleAutomationPrompt = function (mac) {
+
         var macObj = autopilot['macros'][getMacWithName(mac)];
 
         autopilot['suggest'] = macObj;
@@ -570,6 +569,11 @@ app.controller('mainCtrl', function ($scope, $state) {
     };
 
     $scope.updateImages = function () {
+
+        powerpoint.selected = [];
+        powerpoint.slides = [];
+
+
         $scope.images = [];
 
         populate($scope.images, files['images']['animegirls']);
