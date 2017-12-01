@@ -41,6 +41,7 @@ app.directive('draggable', ['$document', function ($document) {
 
 
 app.controller('mainCtrl', function ($scope, $state) {
+    var start2 = 1;
 
     $scope.cond = 3;
 
@@ -379,7 +380,7 @@ app.controller('mainCtrl', function ($scope, $state) {
 
 
     $scope.play = function (mac) {
-        start = 0;
+        start2 = 0;
         autopilot['suggest'] = mac;
         autopilot['macro_reps'][mac['name']] = 0;
         traces = [];
@@ -396,7 +397,7 @@ app.controller('mainCtrl', function ($scope, $state) {
         }, 1000);
 
         // if (autopilot['suggest']['looping'] == false) {
-        for (var i = start; i < autopilot['suggest']['steps'].length; i++) {
+        for (var i = start2; i < autopilot['suggest']['steps'].length; i++) {
 
             if (autopilot['suggest']['steps'][i]['text'].includes('Click image')) {
                 continue;
@@ -423,7 +424,7 @@ app.controller('mainCtrl', function ($scope, $state) {
         //         autoSelectImage(i.toString, false);
         //     }
 
-        start = 1;
+        start2 = 1;
     };
 
     $scope.toggleEdit = function () {
