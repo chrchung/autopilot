@@ -1,6 +1,6 @@
 # autopilot
 
-TDependencies:
+Dependencies:
 
 install the latest version of node.js
 Building & running the project:
