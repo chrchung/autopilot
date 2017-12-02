@@ -1,4 +1,12 @@
-# matchmakers
+# autopilot
 
-This repo contains the re-implemented version of the first Matchmakers game: https://github.com/chrchung/nwm. The nwm repository, which contams the original source code, is legacy is no longer being maintained. 
+Dependencies:
 
+install the latest version of node.js
+Building & running the project:
+
+clone the github repo
+cd into the root of the hierarchy
+run "sudo npm install" in Terminal
+run "bower install" in Terminal
+launch the application by running "node server.js" in Terminal
