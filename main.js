@@ -235,7 +235,7 @@ app.controller('mainCtrl', function ($scope, $state, $http) {
             'looping': steps['looping']
         };
 
-        autopilot['macros'].push(res);
+        autopilot['macros'].unshift(res);
         autopilot['macro_reps'][res['name']] = 0;
 
 
