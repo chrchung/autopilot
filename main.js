@@ -497,6 +497,8 @@ app.controller('mainCtrl', function ($scope, $state, $http) {
 
     $scope.toggleAutomationPrompt = function (mac) {
 
+        show['autopilot-app'] = true;
+
         var macObj = autopilot['macros'][getMacWithName(mac)];
 
         autopilot['suggest'] = macObj;
