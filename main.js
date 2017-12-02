@@ -392,6 +392,13 @@ app.controller('mainCtrl', function ($scope, $state, $http) {
 
     $scope.play = function (mac) {
         start2 = 1;
+
+
+        executeAction('add-slide-app', false);
+
+        executeAction('powerpoint-app', false);
+
+
         autopilot['suggest'] = mac;
         autopilot['macro_reps'][mac['name']] = 0;
         traces = [];
