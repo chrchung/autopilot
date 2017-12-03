@@ -393,10 +393,10 @@ app.controller('mainCtrl', function ($scope, $state, $http) {
     $scope.play = function (mac) {
         start2 = 1;
 
+        $scope.show['powerpoint-app'] = true;
 
-        $scope.executeAction('add-slide-app', false);
+        $scope.show['add-slide-app'] = true;
 
-        $scope.executeAction('powerpoint-app', false);
 
 
         autopilot['suggest'] = mac;
