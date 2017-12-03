@@ -394,9 +394,9 @@ app.controller('mainCtrl', function ($scope, $state, $http) {
         start2 = 1;
 
 
-        executeAction('add-slide-app', false);
+        $scope.executeAction('add-slide-app', false);
 
-        executeAction('powerpoint-app', false);
+        $scope.executeAction('powerpoint-app', false);
 
 
         autopilot['suggest'] = mac;
@@ -504,7 +504,7 @@ app.controller('mainCtrl', function ($scope, $state, $http) {
 
     $scope.toggleAutomationPrompt = function (mac) {
 
-        show['autopilot-app'] = true;
+        $scope.show['autopilot-app'] = true;
 
         var macObj = autopilot['macros'][getMacWithName(mac)];
 
