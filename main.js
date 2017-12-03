@@ -393,9 +393,9 @@ app.controller('mainCtrl', function ($scope, $state, $http) {
     $scope.play = function (mac) {
         start2 = 1;
 
-        $scope.show['powerpoint-app'] = true;
-
-        $scope.show['add-slide-app'] = true;
+        // $scope.show['powerpoint-app'] = true;
+        //
+        // $scope.show['add-slide-app'] = true;
 
 
 
