@@ -222,7 +222,7 @@
     </div>
 
 
-    <div ng-show="show['add-slide-app']" id="add-slide-app" class="draggable window shadow">
+    <div ng-show="show['add-slide-app'] && (autopilot['mode'] != 'sug_noloop' || autopilot['mode'] != 'sug_loop')" id="add-slide-app" class="draggable window shadow">
         <div class="top">
             <div style="cursor:pointer;color:#ff4e4e;" ng-click="record($event)" id="cancel-image"><i class="minus square icon"></i>
             </div>
