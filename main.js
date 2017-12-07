@@ -352,7 +352,7 @@ app.controller('mainCtrl', function ($scope, $state, $http) {
                 console.log(times);
                 break;
             case 'cancel-record':
-
+                resetImages();
                 $scope.cancelRecording();
                 break;
             case 'cancel-exe':
