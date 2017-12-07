@@ -43,7 +43,7 @@ app.directive('draggable', ['$document', function ($document) {
 app.controller('mainCtrl', function ($scope, $state, $http) {
     var start2 = 1;
 
-    $scope.cond = 3;
+    $scope.cond = 9;
 
 
     var times = [];
@@ -80,8 +80,10 @@ app.controller('mainCtrl', function ($scope, $state, $http) {
         }
     };
 
+    var timeOut;
+    var cancelExe;
     var traces = [];
-    var powerpoint = {'selected': [], 'slides': []};
+    var powerpoint = {'selected': [], 'slides': [], 'prevSelected': 0};
     var autopilot = {'suggest': null, 'macros': [], 'repthres': 1, 'mode': 'def', 'steps': [], 'macro_reps': {}};
 
 
@@ -158,12 +160,12 @@ app.controller('mainCtrl', function ($scope, $state, $http) {
         var start = (new Date()).getTime();
 
         var step = addStep(event);
-
-        if (traces.length > 0) {
-            step['ind'] = traces[traces.length - 1]['ind'] + 1;
-        } else {
-            step['ind'] = 0;
-        }
+        //
+        // if (traces.length > 0) {
+        //     step['ind'] = traces[traces.length - 1]['ind'] + 1;
+        // } else {
+            step['ind'] = (new Date()).getTime();
+        // }
 
 
         checkRepetitions();
@@ -207,7 +209,7 @@ app.controller('mainCtrl', function ($scope, $state, $http) {
         var looping = false;
         for (var i = 0; i < l.length; i++) {
             if (l[i]['text'].includes('Click image')) {
-                l[i]['text'] = l[i]['text'].substring(0, l[i]['text'].length - 2);
+                l[i]['text'] = 'Click image'
                 looping = true;
                 l[i]['img'] = 'https://cdn4.iconfinder.com/data/icons/flatified/512/photos.png';
             }
@@ -312,12 +314,14 @@ app.controller('mainCtrl', function ($scope, $state, $http) {
                 $scope.toggleWindow('documents-app');
                 break;
             case 'add-slide':
+                // powerpoint['selected'] = [];
                 $scope.toggleWindow('add-slide-app');
                 break;
             case 'open-image':
                 $scope.openImage();
                 break;
             case 'cancel-image':
+                resetImages();
                 $scope.toggleWindow('add-slide-app');
                 break;
             case 'powerpoint':
@@ -332,6 +336,7 @@ app.controller('mainCtrl', function ($scope, $state, $http) {
                 $scope.toggleRecording();
                 break;
             case 'yes-mac':
+                powerpoint['prevSelected'] = powerpoint['selected'].length;
                 $scope.runMac();
                 break;
             case 'no-mac':
@@ -347,7 +352,22 @@ app.controller('mainCtrl', function ($scope, $state, $http) {
                 console.log(times);
                 break;
             case 'cancel-record':
+
                 $scope.cancelRecording();
+                break;
+            case 'cancel-exe':
+                resetImages();
+
+                $scope.revert();
+                break;
+            case 'cancel-exe2':
+                resetImages();
+
+                $scope.revert();
+                break;
+            case 'okay':
+                powerpoint['prevSelected'] = 0;
+                autopilot['mode'] = 'def';
                 break;
             default:
 
@@ -371,6 +391,24 @@ app.controller('mainCtrl', function ($scope, $state, $http) {
             $http.post("/save", {text: times});
             times = [];
         }
+
+    };
+
+    $scope.revert = function () {
+
+      cancelExe = true;
+
+      clearTimeout(timeout);
+
+      autopilot['mode'] = 'def';
+
+
+      if (powerpoint['prevSelected'] != 0) {
+          powerpoint['slides'].splice(powerpoint['slides'].length - powerpoint['prevSelected'] - 1, powerpoint['prevSelected']);
+
+
+          powerpoint['prevSelected'] = 0;
+      }
 
     };
 
@@ -409,40 +447,44 @@ app.controller('mainCtrl', function ($scope, $state, $http) {
     $scope.runMac = function () {
         autopilot['mode'] = 'run';
 
-        setTimeout(function () {
-            autopilot['mode'] = 'def';
+        timeout = setTimeout(function () {
+
+
+                // if (autopilot['suggest']['looping'] == false) {
+                for (var i = start2; i < autopilot['suggest']['steps'].length; i++) {
+
+                    if (autopilot['suggest']['steps'][i]['text'].includes('Click image')) {
+                        continue;
+                    }
+
+                    executeAction(autopilot['suggest']['steps'][i]['id'], false);
+                }
+
+
+                // } else {
+                //     $scope.im = [];
+                //
+                //     for (var i = 0; i <= powerpoint.selected.length; i++) {
+                //         for (var j = 0; j < autopilot['suggest']['steps'].length; j ++) {
+                //             if (autopilot['suggest']['steps'][i]['text'].contains('Click image')) {
+                //                 executeAction(autopilot['suggest']['steps'][j]['id'], false);
+                //
+                //             } else {
+                //                 executeAction(autopilot['suggest']['steps'][j]['id'], false);
+                //
+                //             }
+                //         }
+                //
+                //         autoSelectImage(i.toString, false);
+                //     }
+
+                start2 = 1;
+
+
+            autopilot['mode'] = 'done';
             $scope.$apply();
-        }, 1000);
 
-        // if (autopilot['suggest']['looping'] == false) {
-        for (var i = start2; i < autopilot['suggest']['steps'].length; i++) {
-
-            if (autopilot['suggest']['steps'][i]['text'].includes('Click image')) {
-                continue;
-            }
-
-            executeAction(autopilot['suggest']['steps'][i]['id'], false);
-        }
-
-
-        // } else {
-        //     $scope.im = [];
-        //
-        //     for (var i = 0; i <= powerpoint.selected.length; i++) {
-        //         for (var j = 0; j < autopilot['suggest']['steps'].length; j ++) {
-        //             if (autopilot['suggest']['steps'][i]['text'].contains('Click image')) {
-        //                 executeAction(autopilot['suggest']['steps'][j]['id'], false);
-        //
-        //             } else {
-        //                 executeAction(autopilot['suggest']['steps'][j]['id'], false);
-        //
-        //             }
-        //         }
-        //
-        //         autoSelectImage(i.toString, false);
-        //     }
-
-        start2 = 1;
+        }, 5000);
     };
 
     $scope.toggleEdit = function () {
@@ -569,18 +611,22 @@ app.controller('mainCtrl', function ($scope, $state, $http) {
 
         powerpoint['slides'].push.apply(powerpoint['slides'], powerpoint['selected']);
 
+        resetImages();
+        $scope.show['add-slide-app'] = false;
+
+    };
+
+    var resetImages = function() {
         for (var i = 0; i < powerpoint['selected'].length; i++) {
             $('#' + powerpoint['selected'][i]['name']).removeClass('gray');
             $('#' + powerpoint['selected'][i]['name']).removeClass('blue');
 
         }
 
+
         powerpoint['selected'] = [];
 
-        $scope.show['add-slide-app'] = false;
-
     };
-
 
     var populate = function (ele, obj) {
 

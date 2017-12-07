@@ -4,7 +4,7 @@
 
     <div id="toolbar">
 
-        <span style="color:#00e3ff" ng-click="record($event)" id="autopilot"><i ng-show="autopilot['mode'] == 'run'" class="repeat icon"></i> <i ng-show="autopilot['mode'] != 'run'" class="font icon"></i></span>
+        <span style="color:#00e3ff" ng-click="record($event)" id="autopilot"><i ng-show="autopilot['mode'] == 'run'" class="loading repeat icon"></i> <i ng-show="autopilot['mode'] != 'run'" class="font icon"></i></span>
 
         <span ng-click="record($event)" id="batter"><i class="plug icon"></i></span>
 
@@ -73,6 +73,44 @@
             </div>
 
         </div>
+
+
+        <div id="run-container" ng-show="autopilot['mode'] == 'run'" style="display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;height: 200px;
+    overflow-y: auto;">
+
+            <div class="text-center">Executing {{ autopilot['suggest']['name'] }} ...
+            </div>
+            <br>
+            <div class="ui red button" id="cancel-exe" ng-click="record($event)">Revert</div>
+
+        </div>
+
+        <div id="done-container" ng-show="autopilot['mode'] == 'done'" style="display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;height: 200px;
+    overflow-y: auto;">
+
+            <div class="text-center">Done {{ autopilot['suggest']['name'] }}.
+            </div>
+            <br>
+
+
+            <div style="display: flex;
+            /* flex-direction: column; */
+            justify-content: center;
+            align-content: flex-end;
+            margin-top: 5px;">
+                <div class="ui green button" id="okay" ng-click="record($event)">Save</div>
+                <div class="ui red button" id="cancel-exe2" ng-click="record($event)">Revert</div>
+            </div>
+
+        </div>
+
+
 
         <div id="macro-view" ng-show="autopilot['mode'] == 'mac'" style="display: flex;
     flex-direction: column;
