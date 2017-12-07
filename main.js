@@ -484,7 +484,7 @@ app.controller('mainCtrl', function ($scope, $state, $http) {
             autopilot['mode'] = 'done';
             $scope.$apply();
 
-        }, 5000);
+        }, 3000);
     };
 
     $scope.toggleEdit = function () {
